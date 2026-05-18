@@ -1,4 +1,6 @@
 import { Monitor, Smartphone, Globe, Calendar, CreditCard, LayoutDashboard } from "lucide-react";
+import Image from "next/image";
+import { ScrollReveal } from "@/components/ui/ScrollReveal";
 
 interface Service {
   id: string;
@@ -6,6 +8,7 @@ interface Service {
   icon: React.ReactNode;
   what: string;
   who: string;
+  imagePath: string;
 }
 
 const presenceServices: Service[] = [
@@ -15,6 +18,7 @@ const presenceServices: Service[] = [
     icon: <Globe className="w-6 h-6 text-primary" />,
     what: "Página enfocada en conversión.",
     who: "Campañas de marketing, ventas.",
+    imagePath: "/images/imagelandingpage.png",
   },
   {
     id: "onepage",
@@ -22,6 +26,7 @@ const presenceServices: Service[] = [
     icon: <Smartphone className="w-6 h-6 text-primary" />,
     what: "Todo tu negocio en una sola página.",
     who: "Portafolios, negocios locales.",
+    imagePath: "/images/imageonepage.png",
   },
   {
     id: "multipage",
@@ -29,6 +34,7 @@ const presenceServices: Service[] = [
     icon: <Monitor className="w-6 h-6 text-primary" />,
     what: "Sitio web corporativo completo.",
     who: "Empresas con múltiples servicios.",
+    imagePath: "/images/imagemultipage.png",
   },
 ];
 
@@ -39,6 +45,7 @@ const operationsServices: Service[] = [
     icon: <LayoutDashboard className="w-6 h-6 text-primary" />,
     what: "Sigue tus pedidos en tiempo real.",
     who: "E-commerce, restaurantes, logística.",
+    imagePath: "/images/imageordertracker.png",
   },
   {
     id: "expenses",
@@ -46,6 +53,7 @@ const operationsServices: Service[] = [
     icon: <CreditCard className="w-6 h-6 text-primary" />,
     what: "Gestión de gastos y finanzas internas.",
     who: "Startups, pymes, agencias.",
+    imagePath: "/images/imageexpenses.png",
   },
   {
     id: "booking",
@@ -53,18 +61,21 @@ const operationsServices: Service[] = [
     icon: <Calendar className="w-6 h-6 text-primary" />,
     what: "Agenda de citas y reservas online.",
     who: "Clínicas, consultores, salones.",
+    imagePath: "/images/imagebooking.png",
   },
 ];
 
 function ServiceCard({ service }: { service: Service }) {
   return (
     <div className="flex flex-col group">
-      {/* Elegant Placeholder */}
-      <div className="w-full aspect-[4/5] bg-surface mb-6 overflow-hidden transition-transform duration-500 group-hover:shadow-lg relative">
-        {/* Placeholder text for image */}
-        <div className="absolute inset-0 flex items-center justify-center text-gray-300 text-xs font-sans px-4 text-center">
-          Mockup Placeholder
-        </div>
+      <div className="w-full aspect-[3/4] bg-white border border-gray-100 mb-6 overflow-hidden transition-all duration-300 group-hover:shadow-xl relative">
+        <Image 
+          src={service.imagePath} 
+          alt={service.title}
+          fill
+          sizes="(max-width: 768px) 100vw, 33vw"
+          className="object-cover"
+        />
       </div>
       
       <div className="flex items-center gap-3 mb-4">
@@ -94,28 +105,36 @@ export function Services() {
       <div className="max-w-7xl mx-auto space-y-40">
         {/* Presencia */}
         <div>
-          <div className="text-center mb-16 space-y-2">
-            <h2 className="text-4xl md:text-5xl">
-              <span className="font-times font-normal">Aumenta tu</span> <span className="font-serif text-primary uppercase tracking-wide">PRESENCIA</span>
-            </h2>
-          </div>
+          <ScrollReveal>
+            <div className="text-center mb-16 space-y-2">
+              <h2 className="text-4xl md:text-5xl">
+                <span className="font-times font-normal">Aumenta tu</span> <span className="font-serif text-primary uppercase tracking-wide">PRESENCIA</span>
+              </h2>
+            </div>
+          </ScrollReveal>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-10">
-            {presenceServices.map((service) => (
-              <ServiceCard key={service.id} service={service} />
+            {presenceServices.map((service, idx) => (
+              <ScrollReveal key={service.id} delay={idx * 100} duration={850}>
+                <ServiceCard service={service} />
+              </ScrollReveal>
             ))}
           </div>
         </div>
 
         {/* Operaciones */}
         <div>
-          <div className="text-center mb-16 space-y-2">
-            <h2 className="text-4xl md:text-5xl">
-              <span className="font-times font-normal">Optimiza tus</span> <span className="font-serif text-primary uppercase tracking-wide">OPERACIONES</span>
-            </h2>
-          </div>
+          <ScrollReveal>
+            <div className="text-center mb-16 space-y-2">
+              <h2 className="text-4xl md:text-5xl">
+                <span className="font-times font-normal">Optimiza tus</span> <span className="font-serif text-primary uppercase tracking-wide">OPERACIONES</span>
+              </h2>
+            </div>
+          </ScrollReveal>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-10">
-            {operationsServices.map((service) => (
-              <ServiceCard key={service.id} service={service} />
+            {operationsServices.map((service, idx) => (
+              <ScrollReveal key={service.id} delay={idx * 100} duration={850}>
+                <ServiceCard service={service} />
+              </ScrollReveal>
             ))}
           </div>
         </div>

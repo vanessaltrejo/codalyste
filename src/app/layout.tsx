@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { DM_Serif_Display, Outfit } from "next/font/google";
 import "./globals.css";
+import { CustomCursor } from "@/components/ui/CustomCursor";
 
 const dmSerifDisplay = DM_Serif_Display({
   weight: "400",
@@ -26,6 +27,7 @@ export default function RootLayout({
   return (
     <html lang="es" className={`${dmSerifDisplay.variable} ${outfit.variable} antialiased`}>
       <body className="min-h-screen bg-background text-foreground font-sans">
+        <CustomCursor />
         {children}
       </body>
     </html>
