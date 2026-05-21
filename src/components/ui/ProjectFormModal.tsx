@@ -2,8 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, ChevronLeft, Check, Sparkles, ChevronDown } from "lucide-react";
-import Image from "next/image";
+import { ArrowRight, ChevronLeft, Check, ChevronDown } from "lucide-react";
 
 interface ProjectFormModalProps {
   onClose?: () => void;
@@ -30,6 +29,28 @@ export function ProjectFormModal({ onClose }: ProjectFormModalProps) {
 
   const [errors, setErrors] = useState<Record<string, string>>({});
   const inputRef = useRef<HTMLInputElement>(null);
+
+  // Lock body scroll on desktop mount, restore on unmount
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 768) {
+        document.body.style.overflow = "hidden";
+        document.documentElement.style.overflow = "hidden";
+      } else {
+        document.body.style.overflow = "";
+        document.documentElement.style.overflow = "";
+      }
+    };
+
+    handleResize(); // Initial call
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   // Autofocus input when step changes
   useEffect(() => {
@@ -71,7 +92,7 @@ export function ProjectFormModal({ onClose }: ProjectFormModalProps) {
         body: JSON.stringify(payload)
       }).catch(err => console.error("Error sending email:", err));
     }
-  }, [currentStep, formData, selectedCountry]);
+  }, [currentStep, formData, selectedCountry, otherServiceText]);
 
   const validateStep = (): boolean => {
     const newErrors: Record<string, string> = {};
@@ -144,11 +165,6 @@ export function ProjectFormModal({ onClose }: ProjectFormModalProps) {
       return { ...prev, service: [...prev.service, svc] };
     });
     setErrors((prev) => ({ ...prev, service: "" }));
-  };
-
-  const handleSubmit = () => {
-    // Left empty since we now do auto-submission
-    return { whatsappUrl: "", mailtoUrl: "" };
   };
 
   const countries = [
@@ -226,7 +242,7 @@ export function ProjectFormModal({ onClose }: ProjectFormModalProps) {
   );
 
   return (
-    <div className="min-h-[calc(100vh-80px)] mt-20 bg-[#FCFCFD] text-[#111115] flex flex-col font-sans w-full relative">
+    <div className="min-h-[calc(100vh-80px)] md:h-[calc(100vh-80px)] md:min-h-0 mt-20 bg-[#FCFCFD] text-[#111115] flex flex-col font-sans w-full relative overflow-y-auto md:overflow-hidden">
       {/* Dynamic Progress Bar */}
       {currentStep > 0 && currentStep < 8 && (
         <div className="w-full h-1 bg-[#F0F0F3] relative shrink-0">

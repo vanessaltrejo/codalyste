@@ -130,13 +130,14 @@ export function Footer() {
         {/* Bottom Row: Logo, Links, Contact, Socials */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 items-start">
           {/* Logo */}
-          <div className="flex items-center gap-2 group">
+          <a href="#hero" className="flex items-center gap-2 group cursor-pointer">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/images/codalystelogo.png"
               alt="Codalyste Logo"
               style={{ height: '40px', width: 'auto' }}
             />
-          </div>
+          </a>
 
 
 

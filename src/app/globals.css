@@ -14,6 +14,7 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 80px;
   }
 }
 
@@ -54,4 +55,24 @@ body {
 .hover-underline:hover::after {
   transform: scaleX(1);
   transform-origin: bottom left;
+}
+
+/* Premium Button Shimmer Animation */
+@keyframes shimmer {
+  0% {
+    transform: translateX(-150%) skewX(-20deg);
+  }
+  30% {
+    transform: translateX(-150%) skewX(-20deg);
+  }
+  50% {
+    transform: translateX(250%) skewX(-20deg);
+  }
+  100% {
+    transform: translateX(250%) skewX(-20deg);
+  }
+}
+
+.animate-shimmer {
+  animation: shimmer 5s infinite ease-in-out;
 }

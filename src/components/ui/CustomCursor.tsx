@@ -5,6 +5,7 @@ import { useEffect, useState, useRef } from "react";
 export function CustomCursor() {
   const cursorRef = useRef<HTMLDivElement>(null);
   const [isHoveringProject, setIsHoveringProject] = useState(false);
+  const [isHoveringButton, setIsHoveringButton] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -49,11 +50,29 @@ export function CustomCursor() {
       setIsHoveringProject(false);
     };
 
+    const handleGlobalMouseOver = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      
+      const isProject = target.closest('.cursor-none-all');
+      if (isProject) {
+        setIsHoveringButton(false);
+        return;
+      }
+
+      const isButton = target.closest('button, a, [role="button"], .cursor-pointer');
+      if (isButton) {
+        setIsHoveringButton(true);
+      } else {
+        setIsHoveringButton(false);
+      }
+    };
+
     window.addEventListener("mousemove", handleMouseMove);
     document.addEventListener("mouseleave", handleMouseLeaveWindow);
     document.addEventListener("mouseenter", handleMouseEnterWindow);
     window.addEventListener("mouseenter-project", handleEnterProject);
     window.addEventListener("mouseleave-project", handleLeaveProject);
+    window.addEventListener("mouseover", handleGlobalMouseOver);
 
     let animationFrameId: number;
 
@@ -79,6 +98,7 @@ export function CustomCursor() {
       document.removeEventListener("mouseenter", handleMouseEnterWindow);
       window.removeEventListener("mouseenter-project", handleEnterProject);
       window.removeEventListener("mouseleave-project", handleLeaveProject);
+      window.removeEventListener("mouseover", handleGlobalMouseOver);
     };
   }, [isVisible]);
 
@@ -90,6 +110,8 @@ export function CustomCursor() {
       className={`hidden md:flex fixed top-0 left-0 pointer-events-none z-[9999] rounded-full items-center justify-center transition-all duration-300 ease-out ${
         isHoveringProject
           ? "w-28 h-28 bg-primary text-white text-[11px] font-bold font-sans uppercase tracking-widest opacity-100 shadow-xl"
+          : isHoveringButton
+          ? "w-12 h-12 bg-transparent border-[1.5px] border-primary opacity-100"
           : "w-3 h-3 bg-primary opacity-80"
       }`}
       style={{

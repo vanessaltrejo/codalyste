@@ -9,6 +9,7 @@ interface Project {
   description: string;
   demoUrl?: string;
   imagePath: string;
+  buttonText?: string;
 }
 
 const projects: Project[] = [
@@ -17,6 +18,7 @@ const projects: Project[] = [
     name: "Comedor de los Pobres",
     description: "Plataforma de donaciones y voluntariado.",
     imagePath: "/images/previewcomedor.png",
+    buttonText: "Próximamente",
   },
   {
     id: "apnl",
@@ -126,13 +128,13 @@ function ProjectCard({ project }: { project: Project }) {
             rel="noopener noreferrer"
             className="px-6 py-2.5 bg-transparent border border-primary text-primary font-bold text-xs hover:bg-primary hover:text-white transition-all duration-300 rounded-none uppercase tracking-wider whitespace-nowrap mb-0.5 block text-center cursor-pointer"
           >
-            Visitar Demo
+            {project.buttonText || "Visitar Demo"}
           </a>
         ) : (
           <span 
             className="px-6 py-2.5 bg-transparent border border-primary text-primary font-bold text-xs hover:bg-primary hover:text-white transition-all duration-300 rounded-none uppercase tracking-wider whitespace-nowrap mb-0.5 block text-center select-none cursor-default"
           >
-            Visitar Demo
+            {project.buttonText || "Visitar Demo"}
           </span>
         )}
       </div>

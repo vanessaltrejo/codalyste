@@ -2,8 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
-import { Mail, ChevronDown, X, MapPin } from "lucide-react";
+import { Mail, ChevronDown, X } from "lucide-react";
 
 interface NavbarProps {
   isFormActive?: boolean;
@@ -25,13 +24,22 @@ export function Navbar({ isFormActive = false, onCloseForm }: NavbarProps) {
 
       <nav className="fixed top-0 left-0 right-0 h-20 bg-surface/40 backdrop-blur-md z-50 border-b border-gray-100/50 flex items-center px-6 md:px-12">
         <div className="max-w-7xl mx-auto w-full flex justify-between items-center relative">
-          <Link href="/" className="flex items-center gap-3 group">
+          <a 
+            href="#hero" 
+            onClick={() => {
+              if (isFormActive) {
+                onCloseForm?.();
+              }
+            }}
+            className="flex items-center gap-3 group cursor-pointer"
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img 
               src="/images/codalystelogo.png" 
               alt="Codalyste Logo" 
               style={{ height: '40px', width: 'auto' }}
             />
-          </Link>
+          </a>
 
 
 
@@ -107,16 +115,7 @@ export function Navbar({ isFormActive = false, onCloseForm }: NavbarProps) {
                     </div>
                   </a>
 
-                  {/* Location Option */}
-                  <div className="flex items-center gap-4 p-4 hover:bg-surface transition-colors group text-left">
-                    <div className="w-10 h-10 rounded-full bg-orange-500/5 flex items-center justify-center text-orange-500 group-hover:bg-orange-500 group-hover:text-white transition-all duration-300 relative shrink-0">
-                      <MapPin className="w-5 h-5" />
-                    </div>
-                    <div>
-                      <span className="block text-xs uppercase tracking-wider text-secondary-text opacity-60 font-sans font-bold">Ubicación</span>
-                      <span className="block text-sm font-sans font-bold text-foreground group-hover:text-orange-600 transition-colors mt-0.5">Monterrey, Nuevo León</span>
-                    </div>
-                  </div>
+
                 </div>
               </div>
             </div>

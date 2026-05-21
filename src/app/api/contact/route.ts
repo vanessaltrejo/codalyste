@@ -220,8 +220,9 @@ export async function POST(request: Request) {
     console.log("📨 Email enviado con éxito vía Resend! ID:", resendData?.id);
     return NextResponse.json({ success: true, message: "Email sent successfully" }, { status: 200 });
 
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Failed to process contact submission:", error);
-    return NextResponse.json({ success: false, error: error.message || "Failed to process request" }, { status: 500 });
+    const errorMessage = error instanceof Error ? error.message : "Failed to process request";
+    return NextResponse.json({ success: false, error: errorMessage }, { status: 500 });
   }
 }

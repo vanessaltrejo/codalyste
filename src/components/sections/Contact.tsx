@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { Plus } from "lucide-react";
-import Image from "next/image";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 
 interface FAQ {
