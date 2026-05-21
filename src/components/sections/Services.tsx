@@ -49,7 +49,7 @@ const operationsServices: Service[] = [
   },
   {
     id: "expenses",
-    title: "Expenses",
+    title: "Control de Gastos",
     icon: <CreditCard className="w-6 h-6 text-primary" />,
     what: "Gestión de gastos y finanzas internas.",
     who: "Startups, pymes, agencias.",
@@ -68,24 +68,14 @@ const operationsServices: Service[] = [
 function ServiceCard({ service }: { service: Service }) {
   return (
     <div className="flex flex-col group">
-      <div className="w-full aspect-[3/4] bg-white border border-gray-100 mb-6 overflow-hidden transition-all duration-300 group-hover:shadow-xl relative">
-        <Image 
-          src={service.imagePath} 
-          alt={service.title}
-          fill
-          sizes="(max-width: 768px) 100vw, 33vw"
-          className="object-cover"
-        />
-      </div>
-      
       <div className="flex items-center gap-3 mb-4">
         <div className="shrink-0 scale-90">
           {service.icon}
         </div>
         <h3 className="text-lg font-serif text-foreground">{service.title}</h3>
       </div>
-      
-      <div className="space-y-1.5">
+
+      <div className="space-y-1.5 mb-12">
         <div className="flex gap-2 items-baseline">
           <span className="text-[9px] font-bold text-primary uppercase tracking-wider shrink-0 min-w-[65px]">Qué es</span>
           <p className="text-secondary-text text-base leading-tight">{service.what}</p>
@@ -94,6 +84,16 @@ function ServiceCard({ service }: { service: Service }) {
           <span className="text-[9px] font-bold text-primary uppercase tracking-wider shrink-0 min-w-[65px]">Para quién</span>
           <p className="text-secondary-text text-base leading-tight">{service.who}</p>
         </div>
+      </div>
+
+      <div className="w-full aspect-[3/4] bg-white border border-gray-100 overflow-hidden transition-all duration-300 group-hover:shadow-xl relative">
+        <Image
+          src={service.imagePath}
+          alt={service.title}
+          fill
+          sizes="(max-width: 768px) 100vw, 33vw"
+          className="object-cover"
+        />
       </div>
     </div>
   );

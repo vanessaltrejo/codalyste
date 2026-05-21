@@ -26,6 +26,7 @@ export function ProjectFormModal({ onClose }: ProjectFormModalProps) {
   const [selectedCountry, setSelectedCountry] = useState({ name: "México", code: "+52", flag: "🇲🇽" });
   const [showCountryDropdown, setShowCountryDropdown] = useState(false);
   const [countrySearch, setCountrySearch] = useState("");
+  const [otherServiceText, setOtherServiceText] = useState("");
 
   const [errors, setErrors] = useState<Record<string, string>>({});
   const inputRef = useRef<HTMLInputElement>(null);
@@ -42,11 +43,12 @@ export function ProjectFormModal({ onClose }: ProjectFormModalProps) {
   // Auto-save lead to Firestore and send email when the final success step is reached
   useEffect(() => {
     if (currentStep === 8) {
+      const mappedServices = formData.service.map(s => s === "Otro" ? `Otro (${otherServiceText})` : s);
       const completePhone = `${selectedCountry.code} ${formData.phone}`;
       const payload = {
         ...formData,
         phone: completePhone,
-        service: formData.service.join(", "),
+        service: mappedServices.join(", "),
       };
 
       // 1. Send to Firebase if configured
@@ -86,8 +88,12 @@ export function ProjectFormModal({ onClose }: ProjectFormModalProps) {
     if (currentStep === 3 && !formData.phone.trim()) {
       newErrors.phone = "Por favor, escribe tu número de teléfono.";
     }
-    if (currentStep === 6 && formData.service.length === 0) {
-      newErrors.service = "Por favor, selecciona al menos un servicio (máximo 2).";
+    if (currentStep === 6) {
+      if (formData.service.length === 0) {
+        newErrors.service = "Por favor, selecciona al menos un servicio (máximo 2).";
+      } else if (formData.service.includes("Otro") && !otherServiceText.trim()) {
+        newErrors.service = "Por favor, especifica qué otro servicio necesitas.";
+      }
     }
     if (currentStep === 7 && !formData.investment) {
       newErrors.investment = "Por favor, selecciona un rango de inversión.";
@@ -178,12 +184,13 @@ export function ProjectFormModal({ onClose }: ProjectFormModalProps) {
   ];
 
   const services = [
-    "Landing Page (Sitio de aterrizaje)",
-    "One-Page (Sitio de una sola página)",
-    "Multi-Page (Sitio web completo)",
-    "Order Tracker (Rastreo de pedidos)",
-    "Expenses (Control de gastos)",
-    "Booking (Sistema de reservas)",
+    "Landing Page",
+    "One-Page",
+    "Multi-Page",
+    "Order Tracker",
+    "Control de Gastos",
+    "Booking",
+    "Otro",
   ];
 
   const investments = [
@@ -451,7 +458,7 @@ export function ProjectFormModal({ onClose }: ProjectFormModalProps) {
                 <input
                   ref={inputRef}
                   type="tel"
-                  placeholder="961 302 5277"
+                  placeholder="81 2600 1588"
                   value={formData.phone}
                   onChange={(e) => {
                     setFormData((prev) => ({ ...prev, phone: e.target.value }));
@@ -622,6 +629,31 @@ export function ProjectFormModal({ onClose }: ProjectFormModalProps) {
                   );
                 })}
               </div>
+
+              {formData.service.includes("Otro") && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="mt-4 space-y-2"
+                >
+                  <label className="block text-sm font-bold font-sans text-secondary-text">
+                    ¿Qué otro servicio necesitas? <span className="text-primary">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Ej. App móvil, Software ERP, CRM a la medida..."
+                    value={otherServiceText}
+                    onChange={(e) => {
+                      setOtherServiceText(e.target.value);
+                      if (errors.service) {
+                        setErrors((prev) => ({ ...prev, service: "" }));
+                      }
+                    }}
+                    className="w-full bg-transparent border-b border-[#E5E5E9] focus:border-primary text-base py-2.5 outline-none text-[#111115] transition-all duration-300 placeholder:text-[#9999A1]"
+                  />
+                </motion.div>
+              )}
+
               {errors.service && (
                 <span className="text-red-500 text-sm mt-2 block font-medium font-sans">{errors.service}</span>
               )}

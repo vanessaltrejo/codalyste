@@ -90,7 +90,7 @@ export function Navbar({ isFormActive = false, onCloseForm }: NavbarProps) {
 
                   {/* WhatsApp Option */}
                   <a 
-                    href="https://wa.me/529613025277" 
+                    href="https://wa.me/528126001588" 
                     target="_blank" 
                     rel="noopener noreferrer" 
                     className="flex items-center gap-4 p-4 hover:bg-surface transition-colors group text-left"
@@ -103,7 +103,7 @@ export function Navbar({ isFormActive = false, onCloseForm }: NavbarProps) {
                     </div>
                     <div>
                       <span className="block text-xs uppercase tracking-wider text-secondary-text opacity-60 font-sans font-bold">Escríbenos</span>
-                      <span className="block text-sm font-sans font-bold text-foreground group-hover:text-emerald-600 transition-colors mt-0.5">+52 (961) 302 5277</span>
+                      <span className="block text-sm font-sans font-bold text-foreground group-hover:text-emerald-600 transition-colors mt-0.5">+52 (81) 2600 1588</span>
                     </div>
                   </a>
 

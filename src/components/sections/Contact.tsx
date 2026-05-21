@@ -17,11 +17,7 @@ const faqs: FAQ[] = [
   },
   {
     question: "¿Cuánto tardan en entregar?",
-    answer: "El tiempo de entrega depende de la complejidad. Una Landing Page típica toma de 1 a 2 semanas, mientras que proyectos más robustos de E-commerce o Sistemas Internos pueden llevar de 4 a 6 semanas.",
-  },
-  {
-    question: "¿Cuáles son las etapas de diseño?",
-    answer: "Nuestro proceso se divide en: Descubrimiento y Estrategia, Arquitectura de Información, Diseño Visual de Alta Fidelidad, Desarrollo Técnico y Optimización final antes del Lanzamiento.",
+    answer: "Nuestros desarrollos se entregan listos en un promedio de 2 a 4 semanas, garantizando la máxima calidad técnica. Si tu negocio necesita salir al mercado antes, contamos con la opción de Entrega Prioritaria para acelerar el proceso asignando recursos dedicados a tu proyecto.",
   },
   {
     question: "¿Puedo solicitar una cotización gratuita?",
@@ -88,11 +84,11 @@ export function Contact() {
                   </svg>
                   <span className="font-times italic text-2xl md:text-3xl text-foreground group-hover:text-primary transition-colors hover-underline w-fit py-0.5">codalyste@gmail.com</span>
                 </a>
-                <a href="https://wa.me/529613025277" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 group w-fit">
+                <a href="https://wa.me/528126001588" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 group w-fit">
                   <svg className="w-8 h-8 text-foreground group-hover:text-primary transition-colors" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path d="M12.012 2c-5.506 0-9.988 4.482-9.988 9.988 0 1.761.46 3.475 1.332 4.988l-1.34 4.902 5.016-1.316c1.466.8 3.115 1.22 4.808 1.22 5.506 0 9.988-4.482 9.988-9.988C22 6.482 17.518 2 12.012 2zm0 17.925c-1.554 0-3.078-.419-4.41-1.21l-.317-.188-3.279.86.875-3.203-.207-.33c-.868-1.385-1.326-2.993-1.326-4.664 0-4.929 4.01-8.939 8.939-8.939 4.929 0 8.939 4.01 8.939 8.939 0 4.929-4.01 8.939-8.939 8.939zm4.909-6.721c-.269-.134-1.59-.785-1.837-.875-.246-.089-.426-.134-.606.134-.18.269-.696.875-.853 1.054-.157.18-.314.202-.583.067-.269-.134-1.137-.419-2.167-1.337-.802-.716-1.344-1.602-1.501-1.871-.157-.269-.017-.414.118-.548.121-.121.269-.314.404-.471.134-.157.18-.269.269-.449.089-.18.045-.336-.022-.471-.067-.134-.606-1.459-.83-1.998-.218-.527-.459-.454-.63-.463-.163-.008-.348-.01-.533-.01s-.488.067-.743.342c-.255.275-.975.953-.975 2.327 0 1.374 1 2.701 1.137 2.88.137.18 1.968 3.006 4.767 4.213.666.287 1.187.458 1.59.587.67.213 1.28.183 1.762.111.537-.08 1.59-.65 1.815-1.246.224-.595.224-1.105.157-1.212-.067-.107-.246-.18-.515-.314z"/>
                   </svg>
-                  <span className="font-times italic text-2xl md:text-3xl text-foreground group-hover:text-primary transition-colors hover-underline w-fit py-0.5">+52 (961) 302 5277</span>
+                  <span className="font-times italic text-2xl md:text-3xl text-foreground group-hover:text-primary transition-colors hover-underline w-fit py-0.5">+52 (81) 2600 1588</span>
                 </a>
               </div>
 
