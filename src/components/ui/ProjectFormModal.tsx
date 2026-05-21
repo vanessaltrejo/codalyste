@@ -19,7 +19,7 @@ export function ProjectFormModal({ onClose }: ProjectFormModalProps) {
     phone: "",
     company: "",
     website: "",
-    service: "",
+    service: [] as string[],
     investment: "",
   });
 
@@ -39,22 +39,35 @@ export function ProjectFormModal({ onClose }: ProjectFormModalProps) {
     }
   }, [currentStep]);
 
-  // Auto-save lead to Firestore when the final success step is reached
+  // Auto-save lead to Firestore and send email when the final success step is reached
   useEffect(() => {
     if (currentStep === 8) {
+      const completePhone = `${selectedCountry.code} ${formData.phone}`;
+      const payload = {
+        ...formData,
+        phone: completePhone,
+        service: formData.service.join(", "),
+      };
+
+      // 1. Send to Firebase if configured
       import("@/lib/firebase")
         .then(({ saveLeadToFirestore }) => {
-          const completePhone = `${selectedCountry.code} ${formData.phone}`;
-          saveLeadToFirestore({
-            ...formData,
-            phone: completePhone,
-          }).catch((err: Error) => {
+          saveLeadToFirestore(payload).catch((err: Error) => {
             console.warn("Firestore auto-save prepared, waiting for environment variables:", err.message);
           });
         })
         .catch((err: Error) => {
           console.warn("Firebase module not loaded yet:", err.message);
         });
+
+      // 2. Send email via our API route
+      fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      }).catch(err => console.error("Error sending email:", err));
     }
   }, [currentStep, formData, selectedCountry]);
 
@@ -73,8 +86,8 @@ export function ProjectFormModal({ onClose }: ProjectFormModalProps) {
     if (currentStep === 3 && !formData.phone.trim()) {
       newErrors.phone = "Por favor, escribe tu número de teléfono.";
     }
-    if (currentStep === 6 && !formData.service) {
-      newErrors.service = "Por favor, selecciona un servicio.";
+    if (currentStep === 6 && formData.service.length === 0) {
+      newErrors.service = "Por favor, selecciona al menos un servicio (máximo 2).";
     }
     if (currentStep === 7 && !formData.investment) {
       newErrors.investment = "Por favor, selecciona un rango de inversión.";
@@ -103,7 +116,7 @@ export function ProjectFormModal({ onClose }: ProjectFormModalProps) {
     }
   };
 
-  const selectOption = (field: "service" | "investment", value: string) => {
+  const selectOption = (field: "investment", value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
     setErrors((prev) => ({ ...prev, [field]: "" }));
     // Auto-advance after small delay for premium UX feel
@@ -113,25 +126,23 @@ export function ProjectFormModal({ onClose }: ProjectFormModalProps) {
     }, 450);
   };
 
+  const toggleService = (svc: string) => {
+    setFormData((prev) => {
+      const isSelected = prev.service.includes(svc);
+      if (isSelected) {
+        return { ...prev, service: prev.service.filter((s) => s !== svc) };
+      }
+      if (prev.service.length >= 2) {
+        return prev;
+      }
+      return { ...prev, service: [...prev.service, svc] };
+    });
+    setErrors((prev) => ({ ...prev, service: "" }));
+  };
+
   const handleSubmit = () => {
-    // Generate beautiful formatted WhatsApp template message
-    const formattedMessage = `Hola Codalyste! Me gustaría cotizar un proyecto.
-
-📋 *Detalles del Proyecto:*
-👤 *Nombre:* ${formData.name}
-✉️ *Correo:* ${formData.email}
-📞 *Teléfono:* ${selectedCountry.code} ${formData.phone}
-🏢 *Empresa:* ${formData.company || "No especificada"}
-🌐 *Sitio Web:* ${formData.website || "No especificado"}
-🛠️ *Servicio:* ${formData.service}
-💰 *Inversión:* ${formData.investment}
-
-Quedo atento a su respuesta.`;
-
-    const whatsappUrl = `https://wa.me/528119784678?text=${encodeURIComponent(formattedMessage)}`;
-    const mailtoUrl = `mailto:codalyste@gmail.com?subject=Nuevo Proyecto - ${formData.name}&body=${encodeURIComponent(formattedMessage)}`;
-
-    return { whatsappUrl, mailtoUrl };
+    // Left empty since we now do auto-submission
+    return { whatsappUrl: "", mailtoUrl: "" };
   };
 
   const countries = [
@@ -167,12 +178,12 @@ Quedo atento a su respuesta.`;
   ];
 
   const services = [
-    "E-commerce / Tienda Digital",
-    "Landing Page / One-Page",
-    "Web Corporativa / Multi-Page",
-    "Desarrollo a la Medida / SaaS",
-    "Estrategia Google Ads / SEO",
-    "Otro",
+    "Landing Page (Sitio de aterrizaje)",
+    "One-Page (Sitio de una sola página)",
+    "Multi-Page (Sitio web completo)",
+    "Order Tracker (Rastreo de pedidos)",
+    "Expenses (Control de gastos)",
+    "Booking (Sistema de reservas)",
   ];
 
   const investments = [
@@ -440,7 +451,7 @@ Quedo atento a su respuesta.`;
                 <input
                   ref={inputRef}
                   type="tel"
-                  placeholder="81 1978 4678"
+                  placeholder="961 302 5277"
                   value={formData.phone}
                   onChange={(e) => {
                     setFormData((prev) => ({ ...prev, phone: e.target.value }));
@@ -584,19 +595,24 @@ Quedo atento a su respuesta.`;
               <div className="space-y-2">
                 <h2 className="text-xl md:text-2xl font-bold font-serif leading-tight text-[#111115] tracking-wide">
                   ¿Qué tipo de servicio necesitas? <span className="text-primary">*</span>
+                  <span className="block text-sm font-sans font-normal text-secondary-text mt-1.5">Selecciona hasta 2 opciones.</span>
                 </h2>
               </div>
               
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                 {services.map((svc) => {
-                  const isSelected = formData.service === svc;
+                  const isSelected = formData.service.includes(svc);
+                  const isMaxReached = formData.service.length >= 2 && !isSelected;
                   return (
                     <button
                       key={svc}
-                      onClick={() => selectOption("service", svc)}
+                      onClick={() => toggleService(svc)}
+                      disabled={isMaxReached}
                       className={`text-left p-3.5 border text-sm md:text-base transition-all duration-300 flex items-center justify-between cursor-pointer ${
                         isSelected
                           ? "border-primary bg-primary/5 text-primary shadow-[0_0_15px_rgba(11,83,250,0.08)] font-sans font-bold"
+                          : isMaxReached
+                          ? "border-[#E5E5E9] bg-gray-50 text-gray-400 cursor-not-allowed font-sans"
                           : "border-[#E5E5E9] bg-[#F7F7FA] hover:border-[#CCCCCC] hover:bg-[#F2F2F5] text-[#111115] font-sans font-bold"
                       }`}
                     >
@@ -703,42 +719,14 @@ Quedo atento a su respuesta.`;
             >
               <div className="space-y-4 flex flex-col items-center">
                 <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-2 animate-pulse">
-                  <Sparkles className="w-8 h-8" />
+                  <Check className="w-8 h-8" />
                 </div>
                 <h2 className="text-2xl md:text-3xl font-serif text-[#111115] font-bold tracking-wide">
-                  ¡Todo listo, {formData.name.split(" ")[0]}!
+                  ¡Se han enviado tus datos correctamente!
                 </h2>
                 <p className="text-secondary-text text-sm md:text-base font-light leading-relaxed max-w-md mx-auto">
-                  Tu información ha sido estructurada de manera premium. Elige tu canal de preferencia para enviarla y recibir asistencia inmediata:
+                  Gracias por tu interés, {formData.name.split(" ")[0]}. Nos pondremos en contacto contigo a la brevedad.
                 </p>
-              </div>
-
-              <div className="flex flex-col sm:flex-row gap-4 justify-center items-stretch w-full">
-                <a
-                  href={handleSubmit().whatsappUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex-1 bg-[#25D366] hover:bg-[#20ba5a] text-white font-bold py-4 px-6 flex items-center justify-center gap-3 transition-colors shadow-[0_4px_15px_rgba(37,211,102,0.15)] cursor-pointer"
-                >
-                  <Image
-                    src="/images/logowhatsapp.png"
-                    alt="WhatsApp"
-                    width={24}
-                    height={24}
-                    className="w-6 h-6 brightness-0 invert object-contain"
-                  />
-                  <span>Enviar por WhatsApp</span>
-                </a>
-
-                <a
-                  href={handleSubmit().mailtoUrl}
-                  className="flex-1 bg-transparent border border-[#E5E5E9] hover:border-black hover:bg-black/5 text-[#111115] font-bold py-4 px-6 flex items-center justify-center gap-3 transition-all cursor-pointer"
-                >
-                  <svg className="w-5 h-5 text-[#111115]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-                  </svg>
-                  <span>Enviar por Correo</span>
-                </a>
               </div>
 
               <div className="pt-4">

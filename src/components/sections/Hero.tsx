@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 
 export function Hero() {
@@ -9,21 +8,22 @@ export function Hero() {
       <div className="max-w-7xl mx-auto flex flex-col items-center w-full">
         <ScrollReveal duration={800}>
           <div className="mb-12">
-            <Image 
+            <img 
               src="/images/codalystelogo.png" 
               alt="Codalyste" 
-              width={480} 
-              height={120} 
-              className="w-full max-w-[480px] h-auto"
-              priority
+              className="w-full max-w-[480px]"
+              style={{ height: 'auto' }}
             />
           </div>
         </ScrollReveal>
 
+
+
+
         <ScrollReveal delay={150} duration={850}>
           <div className="mt-0 max-w-4xl text-base md:text-lg text-foreground leading-relaxed text-justify space-y-6 mx-auto px-4">
             <p>
-              Nos posicionamos como una aceleradora digital a la medida, impulsando la identidad digital de tu empresa y optimizando sus operaciones con herramientas de alta eficiencia.
+              Nos posicionamos como una aceleradora digital a la medida con sede en Monterrey. Impulsamos la identidad digital de tu empresa y optimizamos sus operaciones con herramientas de alta eficiencia.
             </p>
             <p>
               Con un modelo de soluciones que crece al ritmo de tus necesidades, transformamos la tecnología en una inversión rentable y estratégica. Aseguramos que cada proceso digital se convierta en una verdadera herramienta de ventas y control.

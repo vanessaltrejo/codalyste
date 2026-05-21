@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Mail, ChevronDown, X } from "lucide-react";
+import { Mail, ChevronDown, X, MapPin } from "lucide-react";
 
 interface NavbarProps {
   isFormActive?: boolean;
@@ -25,17 +25,16 @@ export function Navbar({ isFormActive = false, onCloseForm }: NavbarProps) {
 
       <nav className="fixed top-0 left-0 right-0 h-20 bg-surface/40 backdrop-blur-md z-50 border-b border-gray-100/50 flex items-center px-6 md:px-12">
         <div className="max-w-7xl mx-auto w-full flex justify-between items-center relative">
-          {/* Logo Placeholder */}
           <Link href="/" className="flex items-center gap-3 group">
-            <Image 
+            <img 
               src="/images/codalystelogo.png" 
               alt="Codalyste Logo" 
-              width={180} 
-              height={40} 
-              className="h-10 w-auto"
-              priority
+              style={{ height: '40px', width: 'auto' }}
             />
           </Link>
+
+
+
 
           {/* Links */}
           {!isFormActive && (
@@ -91,7 +90,7 @@ export function Navbar({ isFormActive = false, onCloseForm }: NavbarProps) {
 
                   {/* WhatsApp Option */}
                   <a 
-                    href="https://wa.me/528119784678" 
+                    href="https://wa.me/529613025277" 
                     target="_blank" 
                     rel="noopener noreferrer" 
                     className="flex items-center gap-4 p-4 hover:bg-surface transition-colors group text-left"
@@ -104,9 +103,20 @@ export function Navbar({ isFormActive = false, onCloseForm }: NavbarProps) {
                     </div>
                     <div>
                       <span className="block text-xs uppercase tracking-wider text-secondary-text opacity-60 font-sans font-bold">Escríbenos</span>
-                      <span className="block text-sm font-sans font-bold text-foreground group-hover:text-emerald-600 transition-colors mt-0.5">+52 (81) 1978 4678</span>
+                      <span className="block text-sm font-sans font-bold text-foreground group-hover:text-emerald-600 transition-colors mt-0.5">+52 (961) 302 5277</span>
                     </div>
                   </a>
+
+                  {/* Location Option */}
+                  <div className="flex items-center gap-4 p-4 hover:bg-surface transition-colors group text-left">
+                    <div className="w-10 h-10 rounded-full bg-orange-500/5 flex items-center justify-center text-orange-500 group-hover:bg-orange-500 group-hover:text-white transition-all duration-300 relative shrink-0">
+                      <MapPin className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <span className="block text-xs uppercase tracking-wider text-secondary-text opacity-60 font-sans font-bold">Ubicación</span>
+                      <span className="block text-sm font-sans font-bold text-foreground group-hover:text-orange-600 transition-colors mt-0.5">Monterrey, Nuevo León</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

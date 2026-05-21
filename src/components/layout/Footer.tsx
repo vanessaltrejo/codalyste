@@ -1,6 +1,5 @@
-import Image from "next/image";
-
 export function Footer() {
+
   return (
     <footer className="bg-background py-16 px-6 border-t border-gray-100">
       <div className="max-w-7xl mx-auto space-y-12">
@@ -33,14 +32,17 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 items-start">
           {/* Logo */}
           <div className="flex items-center gap-2 group">
-            <Image
+            <img
               src="/images/codalystelogo.png"
               alt="Codalyste Logo"
-              width={180}
-              height={40}
-              className="h-10 w-auto"
+              style={{ height: '40px', width: 'auto' }}
             />
           </div>
+
+
+
+
+
 
           {/* Links */}
           <div className="flex flex-col space-y-3">
@@ -52,13 +54,14 @@ export function Footer() {
           {/* Contact */}
           <div className="flex flex-col space-y-3">
             <a href="mailto:codalyste@gmail.com" className="text-foreground hover:text-primary transition-colors font-sans text-lg hover-underline w-fit py-0.5">codalyste@gmail.com</a>
-            <a href="https://wa.me/528119784678" className="text-foreground hover:text-primary transition-colors font-sans text-lg hover-underline w-fit py-0.5">+52 (81) 1978 4678</a>
+            <a href="https://wa.me/529613025277" className="text-foreground hover:text-primary transition-colors font-sans text-lg hover-underline w-fit py-0.5">+52 (961) 302 5277</a>
+            <span className="text-secondary-text font-sans text-lg w-fit py-0.5">Monterrey, N.L.</span>
           </div>
 
           {/* Socials */}
           <div className="flex justify-start md:justify-end gap-6 items-center">
             <a 
-              href="https://wa.me/528119784678" 
+              href="https://wa.me/529613025277" 
               target="_blank" 
               rel="noopener noreferrer" 
               className="text-foreground hover:text-primary transition-colors flex items-center justify-center w-8 h-8 relative"
