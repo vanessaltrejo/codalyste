@@ -28,16 +28,10 @@ export function Hero() {
           <div className="mt-16 w-full max-w-4xl flex flex-col md:flex-row items-start md:items-center gap-8 md:gap-12">
             {/* Quote */}
             <div className="flex-1 text-left">
-              <div className="flex items-start md:items-center gap-1 md:gap-3">
-                <span className="text-6xl text-primary font-serif font-bold leading-none select-none translate-y-2">
-                  “
-                </span>
-                <h2 className="text-2xl md:text-3xl text-foreground leading-relaxed font-times italic mt-2 md:mt-0">
-                  No solo diseñamos.<br className="block md:hidden" /> Creamos negocio.
+              <div className="flex items-center">
+                <h2 className="text-[20px] sm:text-2xl md:text-3xl text-foreground leading-relaxed font-times italic">
+                  <span className="text-primary font-serif font-bold text-4xl md:text-5xl inline-block translate-y-1 md:translate-y-2 mr-3 select-none">“</span>No solo diseñamos. Creamos negocio.<span className="text-primary font-serif font-bold text-4xl md:text-5xl inline-block translate-y-1 md:translate-y-2 ml-0.5 select-none">”</span>
                 </h2>
-                <span className="text-6xl text-primary font-serif font-bold leading-none select-none translate-y-2">
-                  ”
-                </span>
               </div>
             </div>
 

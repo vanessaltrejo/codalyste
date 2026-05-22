@@ -32,23 +32,12 @@ export function ProjectFormModal({ onClose }: ProjectFormModalProps) {
 
 
   useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth >= 768) {
-        document.body.style.overflow = "hidden";
-        document.documentElement.style.overflow = "hidden";
-      } else {
-        document.body.style.overflow = "";
-        document.documentElement.style.overflow = "";
-      }
-    };
-
-    handleResize();
-    window.addEventListener("resize", handleResize);
+    document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
 
     return () => {
       document.body.style.overflow = "";
       document.documentElement.style.overflow = "";
-      window.removeEventListener("resize", handleResize);
     };
   }, []);
 
@@ -242,7 +231,7 @@ export function ProjectFormModal({ onClose }: ProjectFormModalProps) {
   );
 
   return (
-    <div className="h-[calc(100vh-80px)] mt-20 bg-[#FCFCFD] text-[#111115] flex flex-col font-sans w-full relative overflow-hidden">
+    <div className="fixed top-20 bottom-0 left-0 right-0 bg-[#FCFCFD] text-[#111115] flex flex-col font-sans w-full overflow-hidden">
       {/* Dynamic Progress Bar */}
       {currentStep > 0 && currentStep < 8 && (
         <div className="w-full h-1 bg-[#F0F0F3] relative shrink-0">
@@ -265,7 +254,7 @@ export function ProjectFormModal({ onClose }: ProjectFormModalProps) {
       )}
 
       {/* Form Container */}
-      <div className="flex-1 flex items-center justify-center max-w-3xl w-full mx-auto px-6 py-12">
+      <div className="flex-1 flex items-center justify-center max-w-3xl w-full mx-auto px-6 py-12 overflow-y-auto">
         <AnimatePresence mode="wait" custom={direction}>
           {/* WELCOME SCREEN */}
           {currentStep === 0 && (
