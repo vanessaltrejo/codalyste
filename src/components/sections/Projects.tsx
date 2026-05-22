@@ -24,7 +24,7 @@ const projects: Project[] = [
     id: "apnl",
     name: "APNL",
     description: "Sitio corporativo para organización civil.",
-    demoUrl: "https://apnl--apnl-69fd3.us-east4.hosted.app/directorio",
+    demoUrl: "https://apnl--apnl-69fd3.us-east4.hosted.app/",
     imagePath: "/images/apnlimage.png",
   },
   {
