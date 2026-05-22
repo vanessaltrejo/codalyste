@@ -9,6 +9,23 @@ export function Footer() {
   const [isShaking, setIsShaking] = useState(false);
   const [showError, setShowError] = useState(false);
 
+  const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
+    e.preventDefault();
+    const element = document.getElementById(targetId);
+    if (element) {
+      const offset = 80;
+      const bodyRect = document.body.getBoundingClientRect().top;
+      const elementRect = element.getBoundingClientRect().top;
+      const elementPosition = elementRect - bodyRect;
+      const offsetPosition = elementPosition - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      });
+    }
+  };
+
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (!trackingId.trim()) return;
@@ -130,7 +147,11 @@ export function Footer() {
         {/* Bottom Row: Logo, Links, Contact, Socials */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 items-start">
           {/* Logo */}
-          <a href="#hero" className="flex items-center gap-2 group cursor-pointer">
+          <a 
+            href="#hero" 
+            onClick={(e) => handleScroll(e, "hero")}
+            className="flex items-center gap-2 group cursor-pointer"
+          >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/images/codalystelogo.png"
@@ -148,22 +169,40 @@ export function Footer() {
 
           {/* Links */}
           <div className="flex flex-col space-y-3">
-            <a href="#hero" className="text-foreground hover:text-primary transition-colors font-sans text-lg hover-underline w-fit py-0.5">Home</a>
-            <a href="#proyectos" className="text-foreground hover:text-primary transition-colors font-sans text-lg hover-underline w-fit py-0.5">Proyectos</a>
-            <a href="#soluciones" className="text-foreground hover:text-primary transition-colors font-sans text-lg hover-underline w-fit py-0.5">Soluciones</a>
+            <a 
+              href="#hero" 
+              onClick={(e) => handleScroll(e, "hero")}
+              className="text-foreground hover:text-primary transition-colors font-sans text-base hover-underline w-fit py-0.5 cursor-pointer"
+            >
+              Home
+            </a>
+            <a 
+              href="#proyectos" 
+              onClick={(e) => handleScroll(e, "proyectos")}
+              className="text-foreground hover:text-primary transition-colors font-sans text-base hover-underline w-fit py-0.5 cursor-pointer"
+            >
+              Proyectos
+            </a>
+            <a 
+              href="#soluciones" 
+              onClick={(e) => handleScroll(e, "soluciones")}
+              className="text-foreground hover:text-primary transition-colors font-sans text-base hover-underline w-fit py-0.5 cursor-pointer"
+            >
+              Soluciones
+            </a>
           </div>
 
           {/* Contact */}
           <div className="flex flex-col space-y-3">
-            <a href="mailto:codalyste@gmail.com" className="text-foreground hover:text-primary transition-colors font-sans text-lg hover-underline w-fit py-0.5">codalyste@gmail.com</a>
-            <a href="https://wa.me/528126001588" className="text-foreground hover:text-primary transition-colors font-sans text-lg hover-underline w-fit py-0.5">+52 (81) 2600 1588</a>
-            <span className="text-secondary-text font-sans text-lg w-fit py-0.5">Monterrey, N.L.</span>
+            <a href="mailto:codalyste@gmail.com" className="text-foreground hover:text-primary transition-colors font-sans text-base hover-underline w-fit py-0.5">codalyste@gmail.com</a>
+            <a href="https://wa.me/528126001588?text=Hola,%20me%20interesa%20conocer%20c%C3%B3mo%20las%20soluciones%20de%20Codalyste%20pueden%20optimizar%20mi%20negocio.%20%C2%BFMe%20podr%C3%ADan%20brindar%20m%C3%A1s%20informaci%C3%B3n%3F" className="text-foreground hover:text-primary transition-colors font-sans text-base hover-underline w-fit py-0.5">+52 (81) 2600 1588</a>
+            <span className="text-secondary-text font-sans text-base w-fit py-0.5">Monterrey, N.L.</span>
           </div>
 
           {/* Socials */}
           <div className="flex justify-start md:justify-end gap-6 items-center">
             <a 
-              href="https://wa.me/528126001588" 
+              href="https://wa.me/528126001588?text=Hola,%20me%20interesa%20conocer%20c%C3%B3mo%20las%20soluciones%20de%20Codalyste%20pueden%20optimizar%20mi%20negocio.%20%C2%BFMe%20podr%C3%ADan%20brindar%20m%C3%A1s%20informaci%C3%B3n%3F" 
               target="_blank" 
               rel="noopener noreferrer" 
               className="text-foreground hover:text-primary transition-colors flex items-center justify-center w-8 h-8 relative"

@@ -6,7 +6,7 @@ export async function POST(request: Request) {
     const data = await request.json();
     const { name, email, phone, company, website, service, investment } = data;
 
-    // Log the received lead to the console
+
     console.log("=== NEW LEAD RECEIVED ===");
     console.log(`Name: ${name}`);
     console.log(`Email: ${email}`);
@@ -20,7 +20,7 @@ export async function POST(request: Request) {
     const resendApiKey = process.env.RESEND_API_KEY;
     const receiverEmail = process.env.CONTACT_RECEIVER_EMAIL || 'codalyste@gmail.com';
 
-    // If API Key is not set or is the default, log warning but simulate success to keep frontend working smoothly
+
     if (!resendApiKey || resendApiKey.includes("reemplaza_con")) {
       console.warn("⚠️ RESEND_API_KEY is not set or still default in .env.local. Skipping real email sending.");
       return NextResponse.json({ 
@@ -29,10 +29,10 @@ export async function POST(request: Request) {
       }, { status: 200 });
     }
 
-    // Initialize Resend with the secure API key
+
     const resend = new Resend(resendApiKey);
 
-    // Create a gorgeous HTML template for the notification email
+
     const htmlContent = `
       <!DOCTYPE html>
       <html>
@@ -201,15 +201,13 @@ export async function POST(request: Request) {
       </html>
     `;
 
-    // Send the email using Resend
-    // By default on Resend's free tier without a verified domain, emails must be sent from "onboarding@resend.dev"
-    // and can only be sent to the email address you used to register on Resend.
+
     const { data: resendData, error: resendError } = await resend.emails.send({
       from: 'Codalyste Leads <onboarding@resend.dev>',
       to: receiverEmail,
       subject: `⚡️ Nuevo Lead: ${name} - ${company || 'Codalyste'}`,
       html: htmlContent,
-      replyTo: email, // This allows you to click "Reply" in your email client to email the lead directly!
+      replyTo: email,
     });
 
     if (resendError) {

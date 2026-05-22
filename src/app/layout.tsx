@@ -26,7 +26,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es" className={`${dmSerifDisplay.variable} ${outfit.variable} antialiased`}>
-      <body className="min-h-screen bg-background text-foreground font-sans">
+      <body className="min-h-screen bg-background text-foreground font-sans relative">
+        {/* Mesh Grid de Fondo Global para evitar espacio blanco en overscroll */}
+        <div className="fixed inset-0 bg-[linear-gradient(to_right,rgba(0,0,0,0.06)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.06)_1px,transparent_1px)] bg-[size:64px_64px] pointer-events-none z-[-1]" />
+        
         <CustomCursor />
         {children}
       </body>

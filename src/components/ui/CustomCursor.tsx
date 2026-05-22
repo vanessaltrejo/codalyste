@@ -7,7 +7,7 @@ export function CustomCursor() {
   const textRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
-    // Ocultar cursor por defecto en tarjetas de proyectos
+
     const style = document.createElement("style");
     style.innerHTML = `
       .cursor-none-all, .cursor-none-all * {
@@ -20,11 +20,11 @@ export function CustomCursor() {
     const textSpan = textRef.current;
     if (!cursor || !textSpan) return;
     
-    // Almacenar coordenadas en variables simples (evita re-renderizados de React)
+
     let mouseX = -100;
     let mouseY = -100;
     
-    // Variables para el suavizado (lerp)
+
     let currentX = -100;
     let currentY = -100;
 
@@ -32,9 +32,9 @@ export function CustomCursor() {
     let isHoveringProject = false;
     let isHoveringButton = false;
 
-    // Actualiza los estilos visuales directamente en el DOM
+
     const updateCursorVisuals = () => {
-      // Limpiar clases de estados previos
+
       cursor.className = "hidden md:flex fixed top-0 left-0 pointer-events-none z-[9999] rounded-full items-center justify-center transition-all duration-300 ease-out";
       
       if (!isVisible) {
@@ -119,14 +119,14 @@ export function CustomCursor() {
     window.addEventListener("mouseleave-project", handleLeaveProject);
     window.addEventListener("mouseover", handleGlobalMouseOver);
 
-    // Estado inicial
+
     updateCursorVisuals();
 
     let animationFrameId: number;
 
-    // Actualizador de posición acelerado por hardware
+
     const updatePosition = () => {
-      currentX += (mouseX - currentX) * 0.28; // Suavizado ultra-rápido y responsivo
+      currentX += (mouseX - currentX) * 0.28;
       currentY += (mouseY - currentY) * 0.28;
       
       cursor.style.transform = `translate3d(${currentX}px, ${currentY}px, 0) translate(-50%, -50%)`;

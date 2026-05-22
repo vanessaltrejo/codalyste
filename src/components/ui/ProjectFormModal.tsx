@@ -9,8 +9,8 @@ interface ProjectFormModalProps {
 }
 
 export function ProjectFormModal({ onClose }: ProjectFormModalProps) {
-  const [currentStep, setCurrentStep] = useState(0); // 0: Welcome, 1-7: Questions, 8: Success
-  const [direction, setDirection] = useState(1); // 1: next, -1: prev
+  const [currentStep, setCurrentStep] = useState(0);
+  const [direction, setDirection] = useState(1);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -30,7 +30,7 @@ export function ProjectFormModal({ onClose }: ProjectFormModalProps) {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const inputRef = useRef<HTMLInputElement>(null);
 
-  // Lock body scroll on desktop mount, restore on unmount
+
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 768) {
@@ -42,7 +42,7 @@ export function ProjectFormModal({ onClose }: ProjectFormModalProps) {
       }
     };
 
-    handleResize(); // Initial call
+    handleResize();
     window.addEventListener("resize", handleResize);
 
     return () => {
@@ -52,7 +52,7 @@ export function ProjectFormModal({ onClose }: ProjectFormModalProps) {
     };
   }, []);
 
-  // Autofocus input when step changes
+
   useEffect(() => {
     if (inputRef.current) {
       setTimeout(() => {
@@ -61,7 +61,7 @@ export function ProjectFormModal({ onClose }: ProjectFormModalProps) {
     }
   }, [currentStep]);
 
-  // Auto-save lead to Firestore and send email when the final success step is reached
+
   useEffect(() => {
     if (currentStep === 8) {
       const mappedServices = formData.service.map(s => s === "Otro" ? `Otro (${otherServiceText})` : s);
@@ -72,7 +72,7 @@ export function ProjectFormModal({ onClose }: ProjectFormModalProps) {
         service: mappedServices.join(", "),
       };
 
-      // 1. Send to Firebase if configured
+
       import("@/lib/firebase")
         .then(({ saveLeadToFirestore }) => {
           saveLeadToFirestore(payload).catch((err: Error) => {
@@ -83,7 +83,7 @@ export function ProjectFormModal({ onClose }: ProjectFormModalProps) {
           console.warn("Firebase module not loaded yet:", err.message);
         });
 
-      // 2. Send email via our API route
+
       fetch('/api/contact', {
         method: 'POST',
         headers: {
@@ -146,7 +146,7 @@ export function ProjectFormModal({ onClose }: ProjectFormModalProps) {
   const selectOption = (field: "investment", value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
     setErrors((prev) => ({ ...prev, [field]: "" }));
-    // Auto-advance after small delay for premium UX feel
+
     setTimeout(() => {
       setDirection(1);
       setCurrentStep((prev) => prev + 1);
@@ -216,10 +216,10 @@ export function ProjectFormModal({ onClose }: ProjectFormModalProps) {
     "Más de $60,000 MXN",
   ];
 
-  // Calculate thin line progress percentage
+
   const progressPercentage = currentStep === 0 ? 0 : (currentStep / 7) * 100;
 
-  // Animation variants
+
   const slideVariants = {
     enter: (dir: number) => ({
       y: dir > 0 ? 40 : -40,
@@ -242,7 +242,7 @@ export function ProjectFormModal({ onClose }: ProjectFormModalProps) {
   );
 
   return (
-    <div className="min-h-[calc(100vh-80px)] md:h-[calc(100vh-80px)] md:min-h-0 mt-20 bg-[#FCFCFD] text-[#111115] flex flex-col font-sans w-full relative overflow-y-auto md:overflow-hidden">
+    <div className="h-[calc(100vh-80px)] mt-20 bg-[#FCFCFD] text-[#111115] flex flex-col font-sans w-full relative overflow-hidden">
       {/* Dynamic Progress Bar */}
       {currentStep > 0 && currentStep < 8 && (
         <div className="w-full h-1 bg-[#F0F0F3] relative shrink-0">

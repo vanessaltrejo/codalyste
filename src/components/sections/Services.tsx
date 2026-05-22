@@ -75,7 +75,7 @@ function ServiceCard({ service }: { service: Service }) {
         <h3 className="text-lg font-serif text-foreground">{service.title}</h3>
       </div>
 
-      <div className="space-y-1.5 mb-12">
+      <div className="space-y-1.5 mb-[68px]">
         <div className="flex gap-2 items-baseline">
           <span className="text-[9px] font-bold text-primary uppercase tracking-wider shrink-0 min-w-[65px]">Qué es</span>
           <p className="text-secondary-text text-base leading-tight">{service.what}</p>
@@ -86,7 +86,7 @@ function ServiceCard({ service }: { service: Service }) {
         </div>
       </div>
 
-      <div className="w-full aspect-[3/4] bg-white border border-gray-100 overflow-hidden transition-all duration-300 group-hover:shadow-xl relative">
+      <div className="w-full aspect-[4/5] bg-white border border-gray-100 overflow-hidden transition-all duration-300 group-hover:shadow-xl relative">
         <Image
           src={service.imagePath}
           alt={service.title}
@@ -101,7 +101,7 @@ function ServiceCard({ service }: { service: Service }) {
 
 export function Services() {
   return (
-    <section id="soluciones" className="py-24 px-6 bg-background">
+    <section id="soluciones" className="py-24 px-6 bg-background bg-fixed bg-[linear-gradient(to_right,rgba(0,0,0,0.06)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.06)_1px,transparent_1px)] bg-[size:64px_64px] border-b border-gray-100 relative">
       <div className="max-w-7xl mx-auto space-y-40">
         {/* Presencia */}
         <div>

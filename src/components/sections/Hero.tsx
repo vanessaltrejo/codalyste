@@ -5,13 +5,11 @@ import { ScrollReveal } from "@/components/ui/ScrollReveal";
 export function Hero() {
   return (
     <section id="hero" className="relative pt-32 pb-32 px-6 flex flex-col items-start text-left overflow-hidden w-full min-h-[85vh] justify-center">
-      {/* Mesh Grid de Fondo Ultra Tenue (Estilo Arquitectura de Software) */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(0,0,0,0.06)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.06)_1px,transparent_1px)] bg-[size:64px_64px] pointer-events-none z-0" />
       <div className="max-w-7xl mx-auto flex flex-col items-start w-full relative z-10">
 
         {/* Título Principal (Reemplaza al logo) */}
         <ScrollReveal duration={800} direction="up" distance="30px">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl text-foreground mb-8 max-w-4xl leading-tight font-serif font-normal">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl text-foreground mb-8 max-w-4xl leading-[1.1] font-serif font-normal">
             Creamos la tecnología que <span className="text-primary">acelera el crecimiento</span> de tu empresa.
           </h1>
         </ScrollReveal>
@@ -20,10 +18,7 @@ export function Hero() {
         <ScrollReveal delay={150} duration={850}>
           <div className="max-w-3xl text-lg md:text-xl text-foreground/80 leading-relaxed text-left space-y-6">
             <p>
-              Con sede en Monterrey, diseñamos software a la medida y plataformas web de alto impacto que transforman tus operaciones en una inversión altamente rentable.
-            </p>
-            <p>
-              No hacemos desarrollo genérico; construimos herramientas premium diseñadas específicamente para multiplicar tus ventas, automatizar tus procesos y darte el control total de tu negocio.
+              Con sede en Monterrey, desarrollamos software a la medida y plataformas web de alto impacto. Creamos soluciones premium diseñadas específicamente para tu empresa, enfocadas en automatizar procesos, aumentar ventas y darte control total de tu negocio con una inversión realmente rentable.
             </p>
           </div>
         </ScrollReveal>
@@ -38,7 +33,7 @@ export function Hero() {
                   “
                 </span>
                 <h2 className="text-2xl md:text-3xl text-foreground leading-relaxed font-times italic mt-2 md:mt-0">
-                  No solo diseñamos. Creamos negocio.
+                  No solo diseñamos.<br className="block md:hidden" /> Creamos negocio.
                 </h2>
                 <span className="text-6xl text-primary font-serif font-bold leading-none select-none translate-y-2">
                   ”
