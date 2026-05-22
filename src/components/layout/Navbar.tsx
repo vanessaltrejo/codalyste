@@ -37,7 +37,9 @@ export function Navbar({ isFormActive = false, onCloseForm }: NavbarProps) {
             <img 
               src="/images/codalystelogo.png" 
               alt="Codalyste Logo" 
-              style={{ height: '40px', width: 'auto' }}
+              width={133}
+              height={40}
+              style={{ height: '40px', width: '133px' }}
             />
           </a>
 
