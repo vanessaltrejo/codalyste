@@ -17,22 +17,22 @@ const projects: Project[] = [
     id: "comedor",
     name: "Comedor de los Pobres",
     description: "Plataforma de donaciones y voluntariado.",
-    imagePath: "/images/previewcomedor.png",
-    buttonText: "Próximamente",
+    demoUrl: "https://comedor--comedor-4e98e.us-east4.hosted.app/index.html",
+    imagePath: "/images/comedorimage.png",
   },
   {
     id: "apnl",
     name: "APNL",
     description: "Sitio corporativo para organización civil.",
-    demoUrl: "https://apnl-app--apnl-app.us-east4.hosted.app",
-    imagePath: "/images/previewapnl.png",
+    demoUrl: "https://apnl--apnl-69fd3.us-east4.hosted.app/directorio",
+    imagePath: "/images/apnlimage.png",
   },
   {
     id: "cll",
     name: "CLL Ingeniería",
     description: "Portafolio industrial y de servicios.",
-    demoUrl: "https://cll-app--cll-app-2911c.us-east4.hosted.app",
-    imagePath: "/images/previewcll.png",
+    demoUrl: "https://cllingenieria--cllingenieria.us-east4.hosted.app/",
+    imagePath: "/images/cllingenieriaimage.png",
   },
 ];
 

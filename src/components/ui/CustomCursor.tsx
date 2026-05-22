@@ -1,15 +1,13 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useRef } from "react";
 
 export function CustomCursor() {
   const cursorRef = useRef<HTMLDivElement>(null);
-  const [isHoveringProject, setIsHoveringProject] = useState(false);
-  const [isHoveringButton, setIsHoveringButton] = useState(false);
-  const [isVisible, setIsVisible] = useState(false);
+  const textRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
-    // Hide default cursor globally on project cards
+    // Ocultar cursor por defecto en tarjetas de proyectos
     const style = document.createElement("style");
     style.innerHTML = `
       .cursor-none-all, .cursor-none-all * {
@@ -19,35 +17,79 @@ export function CustomCursor() {
     document.head.appendChild(style);
 
     const cursor = cursorRef.current;
+    const textSpan = textRef.current;
+    if (!cursor || !textSpan) return;
     
-    // Store latest mouse coordinates in refs to avoid React state re-renders
+    // Almacenar coordenadas en variables simples (evita re-renderizados de React)
     let mouseX = -100;
     let mouseY = -100;
     
-    // Lerp variables for smooth trailing effect without visual lag
+    // Variables para el suavizado (lerp)
     let currentX = -100;
     let currentY = -100;
+
+    let isVisible = false;
+    let isHoveringProject = false;
+    let isHoveringButton = false;
+
+    // Actualiza los estilos visuales directamente en el DOM
+    const updateCursorVisuals = () => {
+      // Limpiar clases de estados previos
+      cursor.className = "hidden md:flex fixed top-0 left-0 pointer-events-none z-[9999] rounded-full items-center justify-center transition-all duration-300 ease-out";
+      
+      if (!isVisible) {
+        cursor.classList.add("w-3", "h-3", "bg-primary", "opacity-0");
+        textSpan.classList.add("hidden");
+        return;
+      }
+
+      if (isHoveringProject) {
+        cursor.classList.add(
+          "w-28", "h-28", "bg-primary", "text-white", "text-[11px]",
+          "font-bold", "font-sans", "uppercase", "tracking-widest",
+          "opacity-100", "shadow-xl"
+        );
+        textSpan.classList.remove("hidden");
+        textSpan.classList.add("animate-[fadeIn_0.3s_ease-out]");
+      } else if (isHoveringButton) {
+        cursor.classList.add(
+          "w-12", "h-12", "bg-transparent", "border-[1.5px]",
+          "border-primary", "opacity-100"
+        );
+        textSpan.classList.add("hidden");
+      } else {
+        cursor.classList.add("w-3", "h-3", "bg-primary", "opacity-80");
+        textSpan.classList.add("hidden");
+      }
+    };
 
     const handleMouseMove = (e: MouseEvent) => {
       mouseX = e.clientX;
       mouseY = e.clientY;
-      if (!isVisible) setIsVisible(true);
+      if (!isVisible) {
+        isVisible = true;
+        updateCursorVisuals();
+      }
     };
 
     const handleMouseLeaveWindow = () => {
-      setIsVisible(false);
+      isVisible = false;
+      updateCursorVisuals();
     };
 
     const handleMouseEnterWindow = () => {
-      setIsVisible(true);
+      isVisible = true;
+      updateCursorVisuals();
     };
 
     const handleEnterProject = () => {
-      setIsHoveringProject(true);
+      isHoveringProject = true;
+      updateCursorVisuals();
     };
 
     const handleLeaveProject = () => {
-      setIsHoveringProject(false);
+      isHoveringProject = false;
+      updateCursorVisuals();
     };
 
     const handleGlobalMouseOver = (e: MouseEvent) => {
@@ -55,40 +97,43 @@ export function CustomCursor() {
       
       const isProject = target.closest('.cursor-none-all');
       if (isProject) {
-        setIsHoveringButton(false);
+        if (isHoveringButton) {
+          isHoveringButton = false;
+          updateCursorVisuals();
+        }
         return;
       }
 
       const isButton = target.closest('button, a, [role="button"], .cursor-pointer');
-      if (isButton) {
-        setIsHoveringButton(true);
-      } else {
-        setIsHoveringButton(false);
+      const shouldHover = !!isButton;
+      if (shouldHover !== isHoveringButton) {
+        isHoveringButton = shouldHover;
+        updateCursorVisuals();
       }
     };
 
-    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
     document.addEventListener("mouseleave", handleMouseLeaveWindow);
     document.addEventListener("mouseenter", handleMouseEnterWindow);
     window.addEventListener("mouseenter-project", handleEnterProject);
     window.addEventListener("mouseleave-project", handleLeaveProject);
     window.addEventListener("mouseover", handleGlobalMouseOver);
 
+    // Estado inicial
+    updateCursorVisuals();
+
     let animationFrameId: number;
 
-    // Use requestAnimationFrame for hardware-accelerated 60/120Hz rendering
-    const updateCursor = () => {
-      if (cursor) {
-        // Smooth interpolation (lerp): current = current + (target - current) * ease
-        currentX += (mouseX - currentX) * 0.25;
-        currentY += (mouseY - currentY) * 0.25;
-        
-        cursor.style.transform = `translate3d(${currentX}px, ${currentY}px, 0) translate(-50%, -50%)`;
-      }
-      animationFrameId = requestAnimationFrame(updateCursor);
+    // Actualizador de posición acelerado por hardware
+    const updatePosition = () => {
+      currentX += (mouseX - currentX) * 0.28; // Suavizado ultra-rápido y responsivo
+      currentY += (mouseY - currentY) * 0.28;
+      
+      cursor.style.transform = `translate3d(${currentX}px, ${currentY}px, 0) translate(-50%, -50%)`;
+      animationFrameId = requestAnimationFrame(updatePosition);
     };
 
-    animationFrameId = requestAnimationFrame(updateCursor);
+    animationFrameId = requestAnimationFrame(updatePosition);
 
     return () => {
       style.remove();
@@ -100,31 +145,21 @@ export function CustomCursor() {
       window.removeEventListener("mouseleave-project", handleLeaveProject);
       window.removeEventListener("mouseover", handleGlobalMouseOver);
     };
-  }, [isVisible]);
-
-  if (!isVisible) return null;
+  }, []);
 
   return (
     <div
       ref={cursorRef}
-      className={`hidden md:flex fixed top-0 left-0 pointer-events-none z-[9999] rounded-full items-center justify-center transition-all duration-300 ease-out ${
-        isHoveringProject
-          ? "w-28 h-28 bg-primary text-white text-[11px] font-bold font-sans uppercase tracking-widest opacity-100 shadow-xl"
-          : isHoveringButton
-          ? "w-12 h-12 bg-transparent border-[1.5px] border-primary opacity-100"
-          : "w-3 h-3 bg-primary opacity-80"
-      }`}
+      className="hidden md:flex fixed top-0 left-0 pointer-events-none z-[9999] rounded-full items-center justify-center transition-all duration-300 ease-out opacity-0"
       style={{
         transform: "translate3d(-100px, -100px, 0) translate(-50%, -50%)",
-        willChange: "transform",
-        transition: "width 0.3s cubic-bezier(0.25, 1, 0.5, 1), height 0.3s cubic-bezier(0.25, 1, 0.5, 1), background-color 0.3s ease-out, opacity 0.3s ease-out",
+        willChange: "transform, width, height, opacity, background-color, border-color",
+        transition: "width 0.3s cubic-bezier(0.25, 1, 0.5, 1), height 0.3s cubic-bezier(0.25, 1, 0.5, 1), background-color 0.3s ease-out, opacity 0.3s ease-out, border-color 0.3s ease-out",
       }}
     >
-      {isHoveringProject && (
-        <span className="animate-[fadeIn_0.3s_ease-out] text-center px-3 select-none leading-tight">
-          Ver Proyecto
-        </span>
-      )}
+      <span ref={textRef} className="hidden text-center px-3 select-none leading-tight">
+        Ver Proyecto
+      </span>
     </div>
   );
 }
