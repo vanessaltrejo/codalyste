@@ -231,10 +231,10 @@ export function ProjectFormModal({ onClose }: ProjectFormModalProps) {
   );
 
   return (
-    <div className="fixed top-20 bottom-0 left-0 right-0 bg-[#FCFCFD] text-[#111115] flex flex-col font-sans w-full overflow-hidden">
+    <div className="fixed top-20 bottom-0 left-0 right-0 bg-background text-foreground flex flex-col font-sans w-full overflow-hidden">
       {/* Dynamic Progress Bar */}
       {currentStep > 0 && currentStep < 8 && (
-        <div className="w-full h-1 bg-[#F0F0F3] relative shrink-0">
+        <div className="w-full h-1 bg-surface-2 relative shrink-0">
           <motion.div
             layoutId="progressBar"
             className="absolute top-0 left-0 h-full bg-primary"
@@ -268,7 +268,7 @@ export function ProjectFormModal({ onClose }: ProjectFormModalProps) {
               transition={{ duration: 0.4, ease: "easeOut" }}
               className="text-center space-y-8 w-full"
             >
-              <h1 className="text-3xl md:text-4xl font-times italic text-[#111115] leading-[1.15] max-w-2xl mx-auto">
+              <h1 className="text-3xl md:text-4xl font-serif italic text-foreground leading-[1.15] max-w-2xl mx-auto">
                 Hola, queremos <br />
                 conocer tu negocio.
               </h1>
@@ -280,7 +280,7 @@ export function ProjectFormModal({ onClose }: ProjectFormModalProps) {
                   setDirection(1);
                   setCurrentStep(1);
                 }}
-                className="bg-primary text-white font-bold text-base md:text-lg px-10 py-3.5 hover:bg-blue-700 hover:scale-[1.03] transition-all duration-300 shadow-[0_4px_20px_rgba(11,83,250,0.15)] cursor-pointer tracking-wide border-none outline-none"
+                className="bg-primary text-white font-bold text-base md:text-lg px-10 py-3.5 hover:bg-primary-hover hover:scale-[1.03] transition-all duration-300 shadow-[0_4px_20px_rgba(0,51,255,0.15)] cursor-pointer tracking-wide border-none outline-none"
               >
                 Comenzar
               </button>
@@ -300,7 +300,7 @@ export function ProjectFormModal({ onClose }: ProjectFormModalProps) {
               className="space-y-6 w-full text-left"
             >
               <div className="space-y-2">
-                <h2 className="text-xl md:text-2xl font-bold font-serif leading-tight text-[#111115] tracking-wide">
+                <h2 className="text-xl md:text-2xl font-bold font-serif leading-tight text-foreground tracking-wide">
                   ¿Cómo te llamas? <span className="text-primary">*</span>
                 </h2>
               </div>
@@ -315,21 +315,21 @@ export function ProjectFormModal({ onClose }: ProjectFormModalProps) {
                     setErrors((prev) => ({ ...prev, name: "" }));
                   }}
                   onKeyDown={handleKeyDown}
-                  className="w-full bg-transparent border-b border-[#E5E5E9] focus:border-primary text-lg md:text-xl py-2.5 outline-none text-[#111115] transition-all duration-300 placeholder:text-[#9999A1]"
+                  className="w-full bg-transparent border-b border-border focus:border-primary text-lg md:text-xl py-2.5 outline-none text-foreground transition-all duration-300 placeholder:text-placeholder"
                 />
                 {errors.name && (
-                  <span className="text-red-500 text-sm mt-2 block font-medium font-sans">{errors.name}</span>
+                  <span className="text-error text-sm mt-2 block font-medium font-sans">{errors.name}</span>
                 )}
               </div>
               <div className="flex gap-4 items-center">
                 <button
                   onClick={handleNext}
-                  className="bg-primary text-white font-bold text-sm md:text-base px-8 py-3.5 hover:bg-blue-700 hover:scale-[1.03] transition-all duration-300 shadow-[0_4px_20px_rgba(11,83,250,0.15)] flex items-center gap-2 group cursor-pointer border-none outline-none"
+                  className="bg-primary text-white font-bold text-sm md:text-base px-8 py-3.5 hover:bg-primary-hover hover:scale-[1.03] transition-all duration-300 shadow-[0_4px_20px_rgba(0,51,255,0.15)] flex items-center gap-2 group cursor-pointer border-none outline-none"
                 >
                   <span>Continuar</span>
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </button>
-                <span className="text-[#88888C] text-sm font-sans hidden md:inline">o presiona ENTER</span>
+                <span className="text-hint text-sm font-sans hidden md:inline">o presiona ENTER</span>
               </div>
             </motion.div>
           )}
@@ -347,7 +347,7 @@ export function ProjectFormModal({ onClose }: ProjectFormModalProps) {
               className="space-y-6 w-full text-left"
             >
               <div className="space-y-2">
-                <h2 className="text-xl md:text-2xl font-bold font-serif leading-tight text-[#111115] tracking-wide">
+                <h2 className="text-xl md:text-2xl font-bold font-serif leading-tight text-foreground tracking-wide">
                   Tu correo electrónico <span className="text-primary">*</span>
                 </h2>
               </div>
@@ -362,28 +362,28 @@ export function ProjectFormModal({ onClose }: ProjectFormModalProps) {
                     setErrors((prev) => ({ ...prev, email: "" }));
                   }}
                   onKeyDown={handleKeyDown}
-                  className="w-full bg-transparent border-b border-[#E5E5E9] focus:border-primary text-lg md:text-xl py-2.5 outline-none text-[#111115] transition-all duration-300 placeholder:text-[#9999A1]"
+                  className="w-full bg-transparent border-b border-border focus:border-primary text-lg md:text-xl py-2.5 outline-none text-foreground transition-all duration-300 placeholder:text-placeholder"
                 />
                 {errors.email && (
-                  <span className="text-red-500 text-sm mt-2 block font-medium font-sans">{errors.email}</span>
+                  <span className="text-error text-sm mt-2 block font-medium font-sans">{errors.email}</span>
                 )}
               </div>
               <div className="flex gap-4 items-center">
                 <button
                   onClick={handlePrev}
-                  className="text-[#88888C] hover:text-black transition-colors py-3 px-4 font-bold flex items-center gap-1.5 cursor-pointer border-none outline-none bg-transparent"
+                  className="text-hint hover:text-black transition-colors py-3 px-4 font-bold flex items-center gap-1.5 cursor-pointer border-none outline-none bg-transparent"
                 >
                   <ChevronLeft className="w-5 h-5" />
                   <span>Atrás</span>
                 </button>
                 <button
                   onClick={handleNext}
-                  className="bg-primary text-white font-bold text-sm md:text-base px-8 py-3.5 hover:bg-blue-700 hover:scale-[1.03] transition-all duration-300 shadow-[0_4px_20px_rgba(11,83,250,0.15)] flex items-center gap-2 group cursor-pointer border-none outline-none"
+                  className="bg-primary text-white font-bold text-sm md:text-base px-8 py-3.5 hover:bg-primary-hover hover:scale-[1.03] transition-all duration-300 shadow-[0_4px_20px_rgba(0,51,255,0.15)] flex items-center gap-2 group cursor-pointer border-none outline-none"
                 >
                   <span>Continuar</span>
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </button>
-                <span className="text-[#88888C] text-sm font-sans hidden md:inline">o presiona ENTER</span>
+                <span className="text-hint text-sm font-sans hidden md:inline">o presiona ENTER</span>
               </div>
             </motion.div>
           )}
@@ -401,33 +401,33 @@ export function ProjectFormModal({ onClose }: ProjectFormModalProps) {
               className="space-y-6 w-full text-left"
             >
               <div className="space-y-2">
-                <h2 className="text-xl md:text-2xl font-bold font-serif leading-tight text-[#111115] tracking-wide">
+                <h2 className="text-xl md:text-2xl font-bold font-serif leading-tight text-foreground tracking-wide">
                   Tu número de teléfono <span className="text-primary">*</span>
                 </h2>
               </div>
-              <div className="relative flex items-center border-b border-[#E5E5E9] focus-within:border-primary transition-all duration-300">
+              <div className="relative flex items-center border-b border-border focus-within:border-primary transition-all duration-300">
                 {/* Customizable Country Dropdown Selector */}
                 <div className="relative z-50 shrink-0">
                   <button
                     type="button"
                     onClick={() => setShowCountryDropdown(!showCountryDropdown)}
-                    className="text-lg md:text-xl py-2.5 pr-3 text-[#111115] font-light flex items-center gap-1.5 shrink-0 select-none hover:bg-black/[0.03] transition-colors border-none outline-none bg-transparent cursor-pointer"
+                    className="text-lg md:text-xl py-2.5 pr-3 text-foreground font-light flex items-center gap-1.5 shrink-0 select-none hover:bg-black/[0.03] transition-colors border-none outline-none bg-transparent cursor-pointer"
                   >
                     <span>{selectedCountry.flag}</span>
                     <span>{selectedCountry.code}</span>
-                    <ChevronDown className="w-4 h-4 text-[#77777C]" />
+                    <ChevronDown className="w-4 h-4 text-hint" />
                   </button>
 
                   {showCountryDropdown && (
-                    <div className="absolute left-0 top-full mt-2 w-[280px] max-h-[300px] overflow-y-auto bg-white border border-[#E5E5E9] shadow-2xl z-50 p-2 flex flex-col gap-1">
+                    <div className="absolute left-0 top-full mt-2 w-[280px] max-h-[300px] overflow-y-auto bg-background border border-border shadow-2xl z-50 p-2 flex flex-col gap-1">
                       <input
                         type="text"
                         placeholder="Buscar..."
                         value={countrySearch}
                         onChange={(e) => setCountrySearch(e.target.value)}
-                        className="bg-[#F7F7FA] border border-[#E5E5E9] focus:border-primary text-sm p-2 text-[#111115] w-full outline-none placeholder:text-[#9999A1] font-sans font-normal mb-1 shrink-0"
+                        className="bg-surface-2 border border-border focus:border-primary text-sm p-2 text-foreground w-full outline-none placeholder:text-placeholder font-sans font-normal mb-1 shrink-0"
                       />
-                      <div className="overflow-y-auto flex-1 flex flex-col divide-y divide-gray-50">
+                      <div className="overflow-y-auto flex-1 flex flex-col divide-y divide-border-light">
                         {filteredCountries.length > 0 ? (
                           filteredCountries.map((c) => (
                             <button
@@ -437,10 +437,10 @@ export function ProjectFormModal({ onClose }: ProjectFormModalProps) {
                                 setShowCountryDropdown(false);
                                 setCountrySearch("");
                               }}
-                              className={`w-full text-left p-2.5 flex items-center justify-between hover:bg-[#F2F2F5] transition-colors border-none outline-none bg-transparent cursor-pointer font-sans ${
+                              className={`w-full text-left p-2.5 flex items-center justify-between hover:bg-surface-2 transition-colors border-none outline-none bg-transparent cursor-pointer font-sans ${
                                 selectedCountry.code === c.code && selectedCountry.flag === c.flag
                                   ? "bg-primary/5 text-primary font-bold animate-fade-in"
-                                  : "text-[#111115]"
+                                  : "text-foreground"
                               }`}
                             >
                               <div className="flex items-center gap-3">
@@ -451,7 +451,7 @@ export function ProjectFormModal({ onClose }: ProjectFormModalProps) {
                             </button>
                           ))
                         ) : (
-                          <div className="p-4 text-center text-sm text-[#9999A1] font-sans">
+                          <div className="p-4 text-center text-sm text-placeholder font-sans">
                             No se encontraron resultados
                           </div>
                         )}
@@ -470,28 +470,28 @@ export function ProjectFormModal({ onClose }: ProjectFormModalProps) {
                     setErrors((prev) => ({ ...prev, phone: "" }));
                   }}
                   onKeyDown={handleKeyDown}
-                  className="w-full bg-transparent py-2.5 outline-none text-lg md:text-xl text-[#111115] placeholder:text-[#9999A1]"
+                  className="w-full bg-transparent py-2.5 outline-none text-lg md:text-xl text-foreground placeholder:text-placeholder"
                 />
               </div>
               {errors.phone && (
-                <span className="text-red-500 text-sm mt-2 block font-medium font-sans">{errors.phone}</span>
+                <span className="text-error text-sm mt-2 block font-medium font-sans">{errors.phone}</span>
               )}
               <div className="flex gap-4 items-center pt-2">
                 <button
                   onClick={handlePrev}
-                  className="text-[#88888C] hover:text-black transition-colors py-3 px-4 font-bold flex items-center gap-1.5 cursor-pointer border-none outline-none bg-transparent"
+                  className="text-hint hover:text-black transition-colors py-3 px-4 font-bold flex items-center gap-1.5 cursor-pointer border-none outline-none bg-transparent"
                 >
                   <ChevronLeft className="w-5 h-5" />
                   <span>Atrás</span>
                 </button>
                 <button
                   onClick={handleNext}
-                  className="bg-primary text-white font-bold text-sm md:text-base px-8 py-3.5 hover:bg-blue-700 hover:scale-[1.03] transition-all duration-300 shadow-[0_4px_20px_rgba(11,83,250,0.15)] flex items-center gap-2 group cursor-pointer border-none outline-none"
+                  className="bg-primary text-white font-bold text-sm md:text-base px-8 py-3.5 hover:bg-primary-hover hover:scale-[1.03] transition-all duration-300 shadow-[0_4px_20px_rgba(0,51,255,0.15)] flex items-center gap-2 group cursor-pointer border-none outline-none"
                 >
                   <span>Continuar</span>
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </button>
-                <span className="text-[#88888C] text-sm font-sans hidden md:inline">o presiona ENTER</span>
+                <span className="text-hint text-sm font-sans hidden md:inline">o presiona ENTER</span>
               </div>
             </motion.div>
           )}
@@ -509,7 +509,7 @@ export function ProjectFormModal({ onClose }: ProjectFormModalProps) {
               className="space-y-6 w-full text-left"
             >
               <div className="space-y-2">
-                <h2 className="text-xl md:text-2xl font-bold font-serif leading-tight text-[#111115] tracking-wide">
+                <h2 className="text-xl md:text-2xl font-bold font-serif leading-tight text-foreground tracking-wide">
                   Nombre de tu empresa
                 </h2>
               </div>
@@ -521,25 +521,25 @@ export function ProjectFormModal({ onClose }: ProjectFormModalProps) {
                   value={formData.company}
                   onChange={(e) => setFormData((prev) => ({ ...prev, company: e.target.value }))}
                   onKeyDown={handleKeyDown}
-                  className="w-full bg-transparent border-b border-[#E5E5E9] focus:border-primary text-lg md:text-xl py-2.5 outline-none text-[#111115] transition-all duration-300 placeholder:text-[#9999A1]"
+                  className="w-full bg-transparent border-b border-border focus:border-primary text-lg md:text-xl py-2.5 outline-none text-foreground transition-all duration-300 placeholder:text-placeholder"
                 />
               </div>
               <div className="flex gap-4 items-center">
                 <button
                   onClick={handlePrev}
-                  className="text-[#88888C] hover:text-black transition-colors py-3 px-4 font-bold flex items-center gap-1.5 cursor-pointer border-none outline-none bg-transparent"
+                  className="text-hint hover:text-black transition-colors py-3 px-4 font-bold flex items-center gap-1.5 cursor-pointer border-none outline-none bg-transparent"
                 >
                   <ChevronLeft className="w-5 h-5" />
                   <span>Atrás</span>
                 </button>
                 <button
                   onClick={handleNext}
-                  className="bg-primary text-white font-bold text-sm md:text-base px-8 py-3.5 hover:bg-blue-700 hover:scale-[1.03] transition-all duration-300 shadow-[0_4px_20px_rgba(11,83,250,0.15)] flex items-center gap-2 group cursor-pointer border-none outline-none"
+                  className="bg-primary text-white font-bold text-sm md:text-base px-8 py-3.5 hover:bg-primary-hover hover:scale-[1.03] transition-all duration-300 shadow-[0_4px_20px_rgba(0,51,255,0.15)] flex items-center gap-2 group cursor-pointer border-none outline-none"
                 >
                   <span>Continuar</span>
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </button>
-                <span className="text-[#88888C] text-sm font-sans hidden md:inline">o presiona ENTER</span>
+                <span className="text-hint text-sm font-sans hidden md:inline">o presiona ENTER</span>
               </div>
             </motion.div>
           )}
@@ -557,7 +557,7 @@ export function ProjectFormModal({ onClose }: ProjectFormModalProps) {
               className="space-y-6 w-full text-left"
             >
               <div className="space-y-2">
-                <h2 className="text-xl md:text-2xl font-bold font-serif leading-tight text-[#111115] tracking-wide">
+                <h2 className="text-xl md:text-2xl font-bold font-serif leading-tight text-foreground tracking-wide">
                   Sitio web actual <span className="text-secondary-text text-sm font-light block mt-1">(Si no tienes, puedes dejarlo en blanco)</span>
                 </h2>
               </div>
@@ -569,25 +569,25 @@ export function ProjectFormModal({ onClose }: ProjectFormModalProps) {
                   value={formData.website}
                   onChange={(e) => setFormData((prev) => ({ ...prev, website: e.target.value }))}
                   onKeyDown={handleKeyDown}
-                  className="w-full bg-transparent border-b border-[#E5E5E9] focus:border-primary text-lg md:text-xl py-2.5 outline-none text-[#111115] transition-all duration-300 placeholder:text-[#9999A1]"
+                  className="w-full bg-transparent border-b border-border focus:border-primary text-lg md:text-xl py-2.5 outline-none text-foreground transition-all duration-300 placeholder:text-placeholder"
                 />
               </div>
               <div className="flex gap-4 items-center">
                 <button
                   onClick={handlePrev}
-                  className="text-[#88888C] hover:text-black transition-colors py-3 px-4 font-bold flex items-center gap-1.5 cursor-pointer border-none outline-none bg-transparent"
+                  className="text-hint hover:text-black transition-colors py-3 px-4 font-bold flex items-center gap-1.5 cursor-pointer border-none outline-none bg-transparent"
                 >
                   <ChevronLeft className="w-5 h-5" />
                   <span>Atrás</span>
                 </button>
                 <button
                   onClick={handleNext}
-                  className="bg-primary text-white font-bold text-sm md:text-base px-8 py-3.5 hover:bg-blue-700 hover:scale-[1.03] transition-all duration-300 shadow-[0_4px_20px_rgba(11,83,250,0.15)] flex items-center gap-2 group cursor-pointer border-none outline-none"
+                  className="bg-primary text-white font-bold text-sm md:text-base px-8 py-3.5 hover:bg-primary-hover hover:scale-[1.03] transition-all duration-300 shadow-[0_4px_20px_rgba(0,51,255,0.15)] flex items-center gap-2 group cursor-pointer border-none outline-none"
                 >
                   <span>Continuar</span>
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </button>
-                <span className="text-[#88888C] text-sm font-sans hidden md:inline">o presiona ENTER</span>
+                <span className="text-hint text-sm font-sans hidden md:inline">o presiona ENTER</span>
               </div>
             </motion.div>
           )}
@@ -605,7 +605,7 @@ export function ProjectFormModal({ onClose }: ProjectFormModalProps) {
               className="space-y-6 w-full text-left"
             >
               <div className="space-y-2">
-                <h2 className="text-xl md:text-2xl font-bold font-serif leading-tight text-[#111115] tracking-wide">
+                <h2 className="text-xl md:text-2xl font-bold font-serif leading-tight text-foreground tracking-wide">
                   ¿Qué tipo de servicio necesitas? <span className="text-primary">*</span>
                   <span className="block text-sm font-sans font-normal text-secondary-text mt-1.5">Selecciona hasta 2 opciones.</span>
                 </h2>
@@ -622,10 +622,10 @@ export function ProjectFormModal({ onClose }: ProjectFormModalProps) {
                       disabled={isMaxReached}
                       className={`text-left p-3.5 border text-sm md:text-base transition-all duration-300 flex items-center justify-between cursor-pointer ${
                         isSelected
-                          ? "border-primary bg-primary/5 text-primary shadow-[0_0_15px_rgba(11,83,250,0.08)] font-sans font-bold"
+                          ? "border-primary bg-primary/5 text-primary shadow-[0_0_15px_rgba(0,51,255,0.08)] font-sans font-bold"
                           : isMaxReached
-                          ? "border-[#E5E5E9] bg-gray-50 text-gray-400 cursor-not-allowed font-sans"
-                          : "border-[#E5E5E9] bg-[#F7F7FA] hover:border-[#CCCCCC] hover:bg-[#F2F2F5] text-[#111115] font-sans font-bold"
+                          ? "border-border bg-surface text-placeholder cursor-not-allowed font-sans"
+                          : "border-border bg-surface-2 hover:border-border-hover hover:bg-surface-2 text-foreground font-sans font-bold"
                       }`}
                     >
                       <span>{svc}</span>
@@ -654,26 +654,26 @@ export function ProjectFormModal({ onClose }: ProjectFormModalProps) {
                         setErrors((prev) => ({ ...prev, service: "" }));
                       }
                     }}
-                    className="w-full bg-transparent border-b border-[#E5E5E9] focus:border-primary text-base py-2.5 outline-none text-[#111115] transition-all duration-300 placeholder:text-[#9999A1]"
+                    className="w-full bg-transparent border-b border-border focus:border-primary text-base py-2.5 outline-none text-foreground transition-all duration-300 placeholder:text-placeholder"
                   />
                 </motion.div>
               )}
 
               {errors.service && (
-                <span className="text-red-500 text-sm mt-2 block font-medium font-sans">{errors.service}</span>
+                <span className="text-error text-sm mt-2 block font-medium font-sans">{errors.service}</span>
               )}
 
               <div className="flex gap-4 items-center pt-2">
                 <button
                   onClick={handlePrev}
-                  className="text-[#88888C] hover:text-black transition-colors py-3 px-4 font-bold flex items-center gap-1.5 cursor-pointer border-none outline-none bg-transparent"
+                  className="text-hint hover:text-black transition-colors py-3 px-4 font-bold flex items-center gap-1.5 cursor-pointer border-none outline-none bg-transparent"
                 >
                   <ChevronLeft className="w-5 h-5" />
                   <span>Atrás</span>
                 </button>
                 <button
                   onClick={handleNext}
-                  className="bg-primary text-white font-bold text-sm md:text-base px-8 py-3.5 hover:bg-blue-700 hover:scale-[1.03] transition-all duration-300 shadow-[0_4px_20px_rgba(11,83,250,0.15)] flex items-center gap-2 group cursor-pointer border-none outline-none"
+                  className="bg-primary text-white font-bold text-sm md:text-base px-8 py-3.5 hover:bg-primary-hover hover:scale-[1.03] transition-all duration-300 shadow-[0_4px_20px_rgba(0,51,255,0.15)] flex items-center gap-2 group cursor-pointer border-none outline-none"
                 >
                   <span>Continuar</span>
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -695,7 +695,7 @@ export function ProjectFormModal({ onClose }: ProjectFormModalProps) {
               className="space-y-6 w-full text-left"
             >
               <div className="space-y-2">
-                <h2 className="text-xl md:text-2xl font-bold font-serif leading-tight text-[#111115] tracking-wide">
+                <h2 className="text-xl md:text-2xl font-bold font-serif leading-tight text-foreground tracking-wide">
                   ¿Cuál es el rango de inversión estimado? <span className="text-primary">*</span>
                 </h2>
               </div>
@@ -709,8 +709,8 @@ export function ProjectFormModal({ onClose }: ProjectFormModalProps) {
                       onClick={() => selectOption("investment", inv)}
                       className={`text-left p-3.5 border text-sm md:text-base transition-all duration-300 flex items-center justify-between cursor-pointer ${
                         isSelected
-                          ? "border-primary bg-primary/5 text-primary shadow-[0_0_15px_rgba(11,83,250,0.08)] font-sans font-bold"
-                          : "border-[#E5E5E9] bg-[#F7F7FA] hover:border-[#CCCCCC] hover:bg-[#F2F2F5] text-[#111115] font-sans font-bold"
+                          ? "border-primary bg-primary/5 text-primary shadow-[0_0_15px_rgba(0,51,255,0.08)] font-sans font-bold"
+                          : "border-border bg-surface-2 hover:border-border-hover hover:bg-surface-2 text-foreground font-sans font-bold"
                       }`}
                     >
                       <span>{inv}</span>
@@ -720,20 +720,20 @@ export function ProjectFormModal({ onClose }: ProjectFormModalProps) {
                 })}
               </div>
               {errors.investment && (
-                <span className="text-red-500 text-sm mt-2 block font-medium font-sans">{errors.investment}</span>
+                <span className="text-error text-sm mt-2 block font-medium font-sans">{errors.investment}</span>
               )}
 
               <div className="flex gap-4 items-center pt-2">
                 <button
                   onClick={handlePrev}
-                  className="text-[#88888C] hover:text-black transition-colors py-3 px-4 font-bold flex items-center gap-1.5 cursor-pointer border-none outline-none bg-transparent"
+                  className="text-hint hover:text-black transition-colors py-3 px-4 font-bold flex items-center gap-1.5 cursor-pointer border-none outline-none bg-transparent"
                 >
                   <ChevronLeft className="w-5 h-5" />
                   <span>Atrás</span>
                 </button>
                 <button
                   onClick={handleNext}
-                  className="bg-primary text-white font-bold text-sm md:text-base px-8 py-3.5 hover:bg-blue-700 hover:scale-[1.03] transition-all duration-300 shadow-[0_4px_20px_rgba(11,83,250,0.15)] flex items-center gap-2 group cursor-pointer border-none outline-none"
+                  className="bg-primary text-white font-bold text-sm md:text-base px-8 py-3.5 hover:bg-primary-hover hover:scale-[1.03] transition-all duration-300 shadow-[0_4px_20px_rgba(0,51,255,0.15)] flex items-center gap-2 group cursor-pointer border-none outline-none"
                 >
                   <span>Finalizar</span>
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -758,7 +758,7 @@ export function ProjectFormModal({ onClose }: ProjectFormModalProps) {
                 <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-2 animate-pulse">
                   <Check className="w-8 h-8" />
                 </div>
-                <h2 className="text-2xl md:text-3xl font-serif text-[#111115] font-bold tracking-wide">
+                <h2 className="text-2xl md:text-3xl font-sans text-foreground font-bold tracking-wide">
                   ¡Se han enviado tus datos correctamente!
                 </h2>
                 <p className="text-secondary-text text-sm md:text-base font-light leading-relaxed max-w-md mx-auto">
@@ -769,7 +769,7 @@ export function ProjectFormModal({ onClose }: ProjectFormModalProps) {
               <div className="pt-4">
                 <button
                   onClick={onClose}
-                  className="text-[#88888C] hover:text-black transition-colors font-medium hover:underline text-sm cursor-pointer border-none outline-none bg-transparent"
+                  className="text-hint hover:text-black transition-colors font-medium hover:underline text-sm cursor-pointer border-none outline-none bg-transparent"
                 >
                   Volver al sitio web
                 </button>

@@ -28,7 +28,7 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="border-b border-gray-200 py-4">
+    <div className="border-b border-border py-4">
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="flex justify-between items-center w-full text-left focus:outline-none group cursor-pointer"
@@ -57,15 +57,15 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
 
 export function Contact() {
   return (
-    <section id="contacto" className="py-24 px-6 bg-surface border-y border-gray-100">
+    <section id="contacto" className="py-24 px-6 bg-surface-light border-y border-border-light">
       <div className="max-w-4xl mx-auto space-y-24">
 
         {/* Contact CTA */}
         <div className="text-center space-y-16">
           <ScrollReveal>
             <div className="space-y-3.5">
-              <h2 className="text-4xl md:text-5xl font-serif text-foreground uppercase tracking-wide">
-                HABLEMOS
+              <h2 className="text-4xl md:text-5xl font-sans font-bold text-foreground">
+                Hablemos
               </h2>
               <p className="text-secondary-text text-base font-sans italic opacity-70">
                 Nos pondremos en contacto contigo lo más pronto posible
@@ -95,7 +95,7 @@ export function Contact() {
               <div className="flex flex-col items-center">
                 <button 
                   onClick={() => window.openProjectForm?.()}
-                  className="bg-primary text-white text-lg md:text-xl font-bold px-12 py-4 hover:bg-blue-700 hover:scale-[1.03] transition-all duration-300 shadow-[0_4px_20px_rgba(11,83,250,0.15)] w-full md:w-auto text-center cursor-pointer border-none outline-none"
+                  className="bg-primary text-white text-lg md:text-xl font-bold px-12 py-4 hover:bg-primary-hover hover:scale-[1.03] transition-all duration-300 shadow-[0_4px_20px_rgba(0,51,255,0.15)] w-full md:w-auto text-center cursor-pointer border-none outline-none"
                 >
                   Inicia tu proyecto
                 </button>

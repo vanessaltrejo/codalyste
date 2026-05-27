@@ -9,7 +9,7 @@ export function Hero() {
 
         {/* Título Principal (Reemplaza al logo) */}
         <ScrollReveal duration={800} direction="up" distance="30px">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl text-foreground mb-8 max-w-4xl leading-[1.1] font-serif font-normal">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl text-foreground mb-8 max-w-4xl leading-[1.1] font-sans font-bold">
             Creamos la tecnología que <span className="text-primary">acelera el crecimiento</span> de tu empresa.
           </h1>
         </ScrollReveal>
@@ -29,7 +29,7 @@ export function Hero() {
             {/* Quote */}
             <div className="flex-1 text-left">
               <div className="flex items-center">
-                <h2 className="text-[20px] sm:text-2xl md:text-3xl text-foreground leading-relaxed font-times italic">
+                <h2 className="text-xl sm:text-2xl md:text-3xl text-foreground leading-relaxed font-times italic">
                   <span className="text-primary font-serif font-bold text-4xl md:text-5xl inline-block translate-y-1 md:translate-y-2 mr-3 select-none">“</span>No solo diseñamos. Creamos negocio.<span className="text-primary font-serif font-bold text-4xl md:text-5xl inline-block translate-y-1 md:translate-y-2 ml-0.5 select-none">”</span>
                 </h2>
               </div>
@@ -39,7 +39,7 @@ export function Hero() {
             <div className="shrink-0 w-full md:w-auto">
               <button
                 onClick={() => window.openProjectForm?.()}
-                className="relative overflow-hidden bg-primary text-white text-base md:text-lg font-bold px-10 py-4 hover:bg-blue-700 hover:scale-[1.03] transition-all duration-300 shadow-[0_4px_20px_rgba(11,83,250,0.2)] w-full md:w-auto text-center block cursor-pointer border-none outline-none group"
+                className="relative overflow-hidden bg-primary text-white text-base md:text-lg font-bold px-10 py-4 hover:bg-primary-hover hover:scale-[1.03] transition-all duration-300 shadow-[0_4px_20px_rgba(0,51,255,0.2)] w-full md:w-auto text-center block cursor-pointer border-none outline-none group"
               >
                 {/* Shimmer light effect */}
                 <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer" />

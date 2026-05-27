@@ -1,14 +1,35 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-background: #FFFFFF;
-  --color-surface: #F8F9FA;
-  --color-foreground: #000000;
-  --color-primary: #0033FF;
-  --color-secondary-text: #4A4A4A;
-  
+  /* ─── Fondos ─────────────────────────────────────────── */
+  --color-background:  #FFFFFF;   /* Fondo base global                       */
+  --color-surface:     #D6D6D6;   /* Secciones: Navbar                       */
+  --color-surface-light: #F6F6F7; /* Secciones: Projects, Contact (gris claro)*/
+  --color-surface-2:   #DFDFE3;   /* Inputs, opciones, form interior         */
+
+  /* ─── Texto ──────────────────────────────────────────── */
+  --color-foreground:      #000000; /* Texto principal                       */
+  --color-secondary-text:  #4A4A4A; /* Texto secundario / descripciones      */
+  --color-hint:            #737378; /* Íconos inactivos, hints de UI         */
+  --color-placeholder:     #ABABB3; /* Placeholder de inputs                 */
+
+  /* ─── Bordes ─────────────────────────────────────────── */
+  --color-border:         #C4C4CA; /* Borde estándar (inputs, separadores)   */
+  --color-border-light:   #D5D5D9; /* Borde sutil (secciones, imágenes)      */
+  --color-border-hover:   #A8A8AE; /* Borde en hover de opciones             */
+
+  /* ─── Acción ─────────────────────────────────────────── */
+  --color-primary:        #0033FF; /* Azul primario de marca                 */
+  --color-primary-hover:  #0029CC; /* Hover (mismo azul, 20% más oscuro)     */
+
+  /* ─── Funcionales ────────────────────────────────────── */
+  --color-error:           #EF4444; /* Errores de validación                 */
+  --color-whatsapp:        #25D366; /* Botón WhatsApp                        */
+  --color-whatsapp-hover:  #20BA5A; /* Hover WhatsApp                        */
+
+  /* ─── Tipografía ─────────────────────────────────────── */
   --font-serif: var(--font-dm-serif);
-  --font-sans: var(--font-outfit);
+  --font-sans:  var(--font-outfit);
 }
 
 @layer base {

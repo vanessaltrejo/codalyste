@@ -1,7 +1,7 @@
 import { initializeApp, getApps, getApp } from "firebase/app";
 import { getFirestore, collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
-import { FormData } from "@/types";
+import { LeadFormData } from "@/types";
 
 
 const firebaseConfig = {
@@ -22,7 +22,7 @@ export const auth = getAuth(app);
 /**
  * Saves a new lead form submission into the "leads" Firestore collection.
  */
-export async function saveLeadToFirestore(leadData: FormData) {
+export async function saveLeadToFirestore(leadData: LeadFormData) {
   try {
     const leadsCollection = collection(db, "leads");
     const docRef = await addDoc(leadsCollection, {

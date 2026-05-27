@@ -38,12 +38,12 @@ const projects: Project[] = [
 
 export function Projects() {
   return (
-    <section id="proyectos" className="py-24 px-6 bg-surface border-y border-gray-100">
+    <section id="proyectos" className="py-24 px-6 bg-surface-light border-y border-border-light">
       <div className="max-w-7xl mx-auto">
         <ScrollReveal>
           <div className="text-center mb-16 space-y-3.5">
-            <h2 className="text-4xl md:text-5xl text-foreground">
-              <span className="font-times font-normal">Proyectos</span> <span className="font-serif text-primary uppercase tracking-wide">DESTACADOS</span>
+            <h2 className="text-4xl md:text-5xl text-foreground font-sans font-bold">
+              Proyectos <span className="text-primary">Destacados</span>
             </h2>
             <p className="text-secondary-text text-base font-sans italic opacity-70">
               Gracias por confiar en nosotros.
@@ -89,7 +89,7 @@ function ProjectCard({ project }: { project: Project }) {
       <div 
         onMouseEnter={triggerMouseEnter}
         onMouseLeave={triggerMouseLeave}
-        className="w-full aspect-[16/10] bg-white border border-gray-100 overflow-hidden transition-transform duration-500 group-hover:shadow-xl relative cursor-none-all"
+        className="w-full aspect-[16/10] bg-background border border-border-light overflow-hidden transition-transform duration-500 group-hover:shadow-xl relative cursor-none-all"
       >
         {project.demoUrl ? (
           <a 

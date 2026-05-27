@@ -20,12 +20,12 @@ export interface FAQ {
   answer: string;
 }
 
-export interface FormData {
+export interface LeadFormData {
   name: string;
   email: string;
   phone: string;
   company: string;
   website: string;
-  service: string;
+  service: string | string[];
   investment: string;
 }
